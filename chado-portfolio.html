@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CHADO Pitch Pitch — Portfolio Case Study</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400&family=Instrument+Sans:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0e0e0d;
+    --white: #f7f6f2;
+    --warm-gray: #c8c4b8;
+    --mid-gray: #7a7870;
+    --tea: #7a5c3a;
+    --tea-light: #f5ece2;
+    --tea-mid: #c4a882;
+    --amber: #c8831a;
+    --amber-light: #fdf3e3;
+    --red-soft: #c44a2e;
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: 'Instrument Sans', sans-serif;
+    --mono: 'DM Mono', monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--white);
+    color: var(--black);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.65;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.25rem 3rem;
+    background: rgba(247,246,242,0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(14,14,13,0.08);
+  }
+  .nav-brand {
+    font-family: var(--mono); font-size: 13px; font-weight: 300;
+    letter-spacing: 0.08em; color: var(--mid-gray); text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--mid-gray); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--black); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 1fr 1fr;
+    padding-top: 80px;
+  }
+  .hero-left {
+    padding: 6rem 3rem 4rem 4rem;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .project-tag {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--tea); margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .project-tag::before { content: ''; display: inline-block; width: 24px; height: 1px; background: var(--tea); }
+  .hero h1 {
+    font-family: var(--serif); font-size: clamp(3rem, 5vw, 4.5rem);
+    line-height: 1.08; margin-bottom: 0.5rem; color: var(--black);
+  }
+  .hero h1 em { font-style: italic; color: var(--tea); }
+  .hero-subtitle {
+    font-size: 1.05rem; color: var(--mid-gray); max-width: 380px;
+    margin: 1.5rem 0 2.5rem; line-height: 1.7;
+  }
+  .meta-row {
+    display: flex; gap: 2.5rem;
+    border-top: 1px solid rgba(14,14,13,0.1); padding-top: 1.5rem;
+  }
+  .meta-label {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--warm-gray); margin-bottom: 0.25rem;
+  }
+  .meta-value { font-size: 13px; color: var(--mid-gray); }
+
+  .hero-right {
+    background: var(--black); position: relative;
+    display: flex; align-items: center; justify-content: center; overflow: hidden;
+  }
+  .hero-device {
+    width: 240px; position: relative; z-index: 2;
+    animation: float 6s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+  .hero-bg-text {
+    position: absolute; font-family: var(--serif); font-size: 260px;
+    color: rgba(255,255,255,0.025); user-select: none; line-height: 1;
+  }
+  .tea-ring {
+    position: absolute; border-radius: 50%;
+    border: 1px solid rgba(196,168,130,0.16);
+    animation: pulse-ring 4s ease-in-out infinite;
+  }
+  .tea-ring:nth-child(2) { width: 200px; height: 200px; animation-delay: 0s; }
+  .tea-ring:nth-child(3) { width: 320px; height: 320px; animation-delay: 0.8s; }
+  .tea-ring:nth-child(4) { width: 440px; height: 440px; animation-delay: 1.6s; }
+  @keyframes pulse-ring {
+    0%, 100% { opacity: 0.2; transform: scale(1); }
+    50% { opacity: 0.65; transform: scale(1.04); }
+  }
+
+  /* ── GLOBAL SECTIONS ── */
+  section { max-width: 1100px; margin: 0 auto; padding: 6rem 3rem; }
+  section.full-bleed { max-width: none; padding: 0; }
+
+  .section-eyebrow {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--tea); margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .section-eyebrow::before { content: ''; width: 20px; height: 1px; background: var(--tea); display: inline-block; }
+
+  h2 {
+    font-family: var(--serif); font-size: clamp(2rem, 3.5vw, 2.8rem);
+    line-height: 1.15; margin-bottom: 1.5rem;
+  }
+  h3 { font-family: var(--serif); font-size: 1.4rem; margin-bottom: 0.75rem; }
+  p { margin-bottom: 1rem; color: #3a3935; }
+  p:last-child { margin-bottom: 0; }
+
+  .divider { border: none; border-top: 1px solid rgba(14,14,13,0.08); margin: 0; }
+
+  /* ── PROBLEM ── */
+  .problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+  .stat-stack { display: flex; flex-direction: column; gap: 1px; background: rgba(14,14,13,0.08); }
+  .stat-card {
+    background: var(--white); padding: 1.5rem 2rem;
+    display: grid; grid-template-columns: auto 1fr; gap: 1.5rem; align-items: center;
+  }
+  .stat-number { font-family: var(--serif); font-size: 3rem; color: var(--tea); line-height: 1; }
+  .stat-text { font-size: 14px; color: var(--mid-gray); line-height: 1.5; }
+  .stat-text strong { display: block; color: var(--black); font-weight: 500; margin-bottom: 0.2rem; }
+
+  .insight-callout {
+    background: var(--black); color: var(--white);
+    padding: 2.5rem 3rem; margin-top: 3rem; position: relative;
+  }
+  .insight-callout::before {
+    content: '"'; font-family: var(--serif); font-size: 8rem; color: var(--tea-mid);
+    position: absolute; top: -1rem; left: 2rem; line-height: 1; opacity: 0.4;
+  }
+  .insight-callout p {
+    color: var(--white); font-family: var(--serif); font-size: 1.3rem;
+    line-height: 1.5; position: relative; z-index: 1;
+  }
+  .insight-callout cite {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em;
+    color: var(--tea-mid); font-style: normal; display: block; margin-top: 1rem;
+  }
+
+  /* ── RESEARCH SECTION (dark) ── */
+  .research-section { background: #111210; color: var(--white); padding: 6rem 0; }
+  .research-inner { max-width: 1100px; margin: 0 auto; padding: 0 3rem; }
+  .research-section h2, .research-section .section-eyebrow { color: var(--white); }
+  .research-section .section-eyebrow::before { background: var(--tea-mid); }
+  .research-section .section-eyebrow { color: var(--tea-mid); }
+
+  .findings-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+    background: rgba(255,255,255,0.06); margin: 3rem 0;
+  }
+  .finding-card {
+    background: #111210; padding: 2rem 1.5rem;
+    border-top: 2px solid transparent; transition: border-color 0.3s;
+  }
+  .finding-card:hover { border-color: var(--tea-mid); }
+  .finding-stat { font-family: var(--mono); font-size: 1.8rem; color: var(--tea-mid); margin-bottom: 0.75rem; font-weight: 300; }
+  .finding-name { font-family: var(--serif); font-size: 1.05rem; color: var(--white); margin-bottom: 0.5rem; }
+  .finding-desc { font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.5; margin-bottom: 0; }
+  .finding-tag {
+    display: inline-block; margin-top: 1rem; font-family: var(--mono); font-size: 10px;
+    letter-spacing: 0.08em; text-transform: uppercase; padding: 0.25rem 0.6rem;
+    border: 1px solid rgba(196,168,130,0.3); color: var(--tea-mid); border-radius: 2px;
+  }
+  .research-note {
+    border: 1px solid rgba(200,131,26,0.3); background: rgba(200,131,26,0.06);
+    padding: 1.5rem 2rem; display: grid; grid-template-columns: auto 1fr;
+    gap: 1.5rem; align-items: start;
+  }
+  .note-icon { font-size: 1.2rem; margin-top: 0.1rem; }
+  .note-text { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.6; margin-bottom: 0; }
+  .note-text strong { color: var(--amber); font-weight: 500; }
+
+  /* ── FEATURE LOGIC ── */
+  .logic-strip { background: var(--tea-light); padding: 5rem 0; }
+  .logic-inner { max-width: 1100px; margin: 0 auto; padding: 0 3rem; }
+  .logic-grid {
+    display: grid; grid-template-columns: 1fr 60px 1fr;
+    gap: 0; align-items: center; margin-top: 3rem;
+  }
+  .logic-panel { background: var(--white); padding: 2.5rem; border: 1px solid rgba(14,14,13,0.08); }
+  .logic-moment {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--tea); margin-bottom: 1rem;
+  }
+  .logic-panel h3 { font-family: var(--serif); font-size: 1.35rem; margin-bottom: 1.5rem; }
+  .signal-list { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 1.5rem; }
+  .signal-list li { display: grid; grid-template-columns: auto 1fr; gap: 0.75rem; font-size: 14px; align-items: start; }
+  .signal-marker { font-family: var(--mono); font-size: 11px; color: var(--tea); padding-top: 0.15rem; }
+  .signal-text { color: #3a3935; line-height: 1.5; }
+  .output-pill { display: inline-flex; gap: 0.5rem; font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; flex-wrap: wrap; }
+  .pill { padding: 0.3rem 0.8rem; border-radius: 2px; font-size: 11px; }
+  .pill-go { background: #f0e4d4; color: var(--tea); }
+  .pill-charm { background: var(--tea-light); color: var(--tea); border: 1px solid rgba(122,92,58,0.2); }
+  .pill-reward { background: var(--amber-light); color: var(--amber); }
+  .logic-arrow { display: flex; align-items: center; justify-content: center; }
+
+  /* ── USER RESEARCH ── */
+  .persona-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 3rem; }
+  .persona-card { border: 1px solid rgba(14,14,13,0.1); padding: 2rem; position: relative; }
+  .persona-header {
+    display: flex; justify-content: space-between; align-items: start;
+    margin-bottom: 1.5rem; padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(14,14,13,0.08);
+  }
+  .persona-name { font-family: var(--serif); font-size: 1.2rem; }
+  .persona-role { font-size: 13px; color: var(--mid-gray); margin-top: 0.2rem; }
+  .persona-badge {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 0.3rem 0.7rem; background: var(--tea-light); color: var(--tea);
+  }
+  .persona-quote { font-family: var(--serif); font-style: italic; font-size: 1rem; color: var(--black); margin-bottom: 1.25rem; line-height: 1.6; }
+  .tag-section-label {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--warm-gray); margin-bottom: 0.5rem;
+  }
+  .tag-row { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1rem; }
+  .goal-tag {
+    font-family: var(--mono); font-size: 10px; padding: 0.25rem 0.6rem;
+    background: var(--tea-light); color: var(--tea); border-radius: 2px;
+  }
+  .pain-tag {
+    font-family: var(--mono); font-size: 10px; padding: 0.25rem 0.6rem;
+    background: #fde8e3; color: var(--red-soft); border-radius: 2px;
+  }
+  .persona-insight { font-size: 13px; color: var(--mid-gray); margin-bottom: 0; line-height: 1.6; }
+
+  .interview-strip { margin-top: 3rem; border-left: 3px solid var(--tea); padding-left: 2rem; }
+  .interview-item { margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid rgba(14,14,13,0.08); }
+  .interview-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .interviewee { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; color: var(--tea); margin-bottom: 0.5rem; }
+  .interview-quote { font-family: var(--serif); font-style: italic; font-size: 1.05rem; color: var(--black); margin-bottom: 0.5rem; }
+  .interview-finding { font-size: 13px; color: var(--mid-gray); margin-bottom: 0; }
+
+  /* ── JOURNEY MAP ── */
+  .journey-section { background: #f2f0ea; }
+  .journey-inner { max-width: 1100px; margin: 0 auto; padding: 6rem 3rem; }
+  .journey-phases {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1px; background: rgba(14,14,13,0.1); margin-top: 3rem;
+  }
+  .phase { background: #f2f0ea; padding: 2rem; }
+  .phase-label {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--mid-gray); margin-bottom: 1.25rem; padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--tea);
+  }
+  .phase-actions { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.5rem; }
+  .phase-actions li { font-size: 13px; color: #3a3935; padding-left: 1rem; position: relative; }
+  .phase-actions li::before { content: '—'; position: absolute; left: 0; color: var(--warm-gray); }
+  .phase-pain { background: #fde8e3; padding: 0.75rem 1rem; font-size: 12px; color: var(--red-soft); line-height: 1.5; }
+  .phase-chado { background: var(--tea-light); padding: 0.75rem 1rem; font-size: 12px; color: var(--tea); line-height: 1.5; margin-top: 0.5rem; }
+  .phase-chado strong { font-weight: 500; }
+
+  /* ── DESIGN PRINCIPLES ── */
+  .principles-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3rem; }
+  .principle { padding: 2rem; border-top: 2px solid var(--tea); }
+  .principle-number { font-family: var(--mono); font-size: 11px; color: var(--tea); letter-spacing: 0.08em; margin-bottom: 1rem; }
+  .principle h3 { font-family: var(--serif); font-size: 1.2rem; margin-bottom: 0.75rem; }
+  .principle p { font-size: 14px; color: var(--mid-gray); margin-bottom: 0; }
+
+  /* ── KEY SCREENS ── */
+  .screens-section { background: var(--black); padding: 6rem 0; }
+  .screens-inner { max-width: 1100px; margin: 0 auto; padding: 0 3rem; }
+  .screens-section h2, .screens-section .section-eyebrow { color: var(--white); }
+  .screens-section .section-eyebrow { color: var(--tea-mid); }
+  .screens-section .section-eyebrow::before { background: var(--tea-mid); }
+  .screens-section p { color: rgba(255,255,255,0.55); }
+
+  .screen-showcase { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: 3rem; }
+  .screen-frame {
+    background: #1a1a18; border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 20px; padding: 1.25rem 0.75rem; margin-bottom: 1.25rem;
+    min-height: 340px; display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .screen-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; color: var(--tea-mid); margin-bottom: 0.4rem; }
+  .screen-name { font-size: 15px; color: var(--white); font-weight: 500; margin-bottom: 0.4rem; }
+  .screen-desc { font-size: 13px; color: rgba(255,255,255,0.4); margin-bottom: 0; }
+
+  /* ── MOCK PHONE ── */
+  .mock-phone {
+    width: 148px; height: 296px;
+    border-radius: 22px; border: 1.5px solid rgba(255,255,255,0.1);
+    overflow: hidden; position: relative; display: flex; flex-direction: column;
+    font-family: 'DM Mono', monospace;
+  }
+  .mock-sb {
+    height: 30px; display: flex; align-items: center; justify-content: space-between;
+    padding: 0 12px; flex-shrink: 0;
+  }
+  .mock-time { font-size: 8px; }
+  .mock-island { width: 38px; height: 8px; border-radius: 4px; position: absolute; top: 5px; left: 50%; transform: translateX(-50%); }
+
+  /* Screen 1 — Waiting Home */
+  .s1 { background: #fdf8f3; }
+  .s1 .mock-sb { background: #fdf8f3; }
+  .s1 .mock-time { color: #b8a898; }
+  .s1 .mock-island { background: #18120a; }
+  .s1-body { flex: 1; padding: 6px 8px; display: flex; flex-direction: column; gap: 5px; background: #fdf8f3; }
+  .s1-brand { text-align: center; font-family: 'DM Serif Display', serif; font-size: 7.5px; color: #c4a882; letter-spacing: .22em; }
+  .s1-order { background: #fff9f4; border: .5px solid #e8ddd3; border-radius: 9px; padding: 7px 9px; display: flex; justify-content: space-between; align-items: flex-end; }
+  .s1-num { font-family: 'DM Serif Display', serif; font-size: 26px; color: #3d2e1e; line-height: 1; }
+  .s1-lbl { font-size: 5px; color: #b8a898; letter-spacing: .1em; margin-bottom: 2px; }
+  .s1-hint { font-size: 5px; color: #d0c0b0; font-style: italic; margin-top: 1px; }
+  .s1-est-n { font-family: 'DM Serif Display', serif; font-size: 14px; color: #c4a882; line-height: 1; text-align: right; }
+  .s1-est-l { font-size: 5px; color: #b8a898; text-align: right; }
+  .s1-prog { padding: 0 1px; }
+  .s1-dots { display: flex; align-items: center; margin-bottom: 3px; }
+  .s1-d { width: 5px; height: 5px; border-radius: 50%; background: #edddd0; flex-shrink: 0; }
+  .s1-d.d { background: #c4a882; }
+  .s1-d.a { background: #8b6b4a; }
+  .s1-l { flex: 1; height: .5px; background: #edddd0; }
+  .s1-l.d { background: #c4a882; }
+  .s1-dlbls { display: flex; justify-content: space-between; }
+  .s1-dl { font-size: 4.5px; color: #c4b4a8; flex: 1; text-align: center; }
+  .s1-dl.a { color: #8b6b4a; }
+  .s1-wyw { font-size: 5px; color: #b8a898; letter-spacing: .1em; }
+  .s1-tiles { display: flex; gap: 4px; }
+  .s1-tile { flex: 1; background: #fff9f4; border: .5px solid #e8ddd3; border-radius: 7px; padding: 6px 4px; }
+  .s1-ti { font-size: 9px; margin-bottom: 2px; }
+  .s1-tt { font-family: 'DM Serif Display', serif; font-size: 7px; color: #3d2e1e; margin-bottom: 1px; }
+  .s1-ts { font-size: 5px; color: #9a8070; line-height: 1.3; }
+  .s1-tc { font-size: 5px; color: #c4a882; margin-top: 2px; }
+
+  /* Screen 2 — DIY Workshop */
+  .s2 { background: #fdf8f3; }
+  .s2 .mock-sb { background: #fdf8f3; }
+  .s2 .mock-time { color: #b8a898; }
+  .s2 .mock-island { background: #18120a; }
+  .s2-body { flex: 1; padding: 6px 8px; display: flex; flex-direction: column; gap: 4px; background: #fdf8f3; }
+  .s2-nb { display: flex; align-items: center; gap: 3px; }
+  .s2-back { width: 14px; height: 14px; border-radius: 50%; border: .5px solid #e8ddd3; background: #fff9f4; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .s2-back svg { width: 7px; height: 7px; }
+  .s2-nbt { font-size: 6px; color: #3d2e1e; letter-spacing: .1em; }
+  .s2-cup { display: flex; justify-content: center; padding: 2px 0 4px; }
+  .s2-tabs { display: flex; background: #f0e8de; border-radius: 5px; padding: 2px; gap: 1px; }
+  .s2-tab { flex: 1; padding: 3px 2px; border-radius: 3px; font-size: 4.5px; color: #9a8070; text-align: center; letter-spacing: .05em; }
+  .s2-tab.on { background: #fff9f4; color: #3d2e1e; }
+  .s2-slbl { font-size: 5px; color: #b8a898; letter-spacing: .1em; }
+  .s2-opts { display: flex; gap: 3px; }
+  .s2-opt { flex: 1; border: .5px solid #e8ddd3; border-radius: 5px; padding: 3px 2px; text-align: center; background: #fff9f4; }
+  .s2-opt.on { border-color: #c4a882; background: rgba(196,168,130,.07); }
+  .s2-sw { width: 8px; height: 8px; border-radius: 50%; margin: 0 auto 1px; border: .5px solid rgba(0,0,0,.05); }
+  .s2-on { font-size: 4.5px; color: #9a8070; }
+  .s2-save { width: 100%; padding: 5px; background: #3d2e1e; border: none; border-radius: 6px; font-size: 5.5px; color: #fdf8f3; letter-spacing: .08em; margin-top: auto; font-family: 'DM Mono', monospace; cursor: default; }
+
+  /* Screen 3 — AR Scan */
+  .s3 { background: #0c0904; }
+  .s3 .mock-sb { background: #0c0904; }
+  .s3 .mock-time { color: rgba(255,255,255,.35); }
+  .s3 .mock-island { background: #000; }
+  .s3-body { flex: 1; padding: 6px 8px; display: flex; flex-direction: column; gap: 0; background: #0c0904; }
+  .s3-nb { display: flex; align-items: center; gap: 3px; margin-bottom: 8px; }
+  .s3-back { width: 14px; height: 14px; border-radius: 50%; border: .5px solid rgba(255,255,255,.1); background: rgba(255,255,255,.05); display: flex; align-items: center; justify-content: center; }
+  .s3-back svg { width: 7px; height: 7px; }
+  .s3-nbt { font-size: 6px; color: rgba(255,255,255,.6); letter-spacing: .12em; }
+  .s3-vf { width: 90px; height: 90px; margin: 0 auto 10px; position: relative; }
+  .s3-corner { position: absolute; width: 11px; height: 11px; border-color: rgba(196,168,130,.65); border-style: solid; }
+  .s3-ctl { top:0;left:0;border-width:1px 0 0 1px; }
+  .s3-ctr { top:0;right:0;border-width:1px 1px 0 0; }
+  .s3-cbl { bottom:0;left:0;border-width:0 0 1px 1px; }
+  .s3-cbr { bottom:0;right:0;border-width:0 1px 1px 0; }
+  .s3-vfl { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 5px; color: rgba(196,168,130,.35); letter-spacing: .1em; }
+  .s3-btn {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: rgba(196,168,130,.1); border: .5px solid rgba(196,168,130,.32);
+    margin: 0 auto 6px; display: flex; align-items: center; justify-content: center;
+    font-size: 5px; color: rgba(196,168,130,.7); letter-spacing: .06em;
+  }
+  .s3-sub { font-size: 4.5px; color: rgba(255,255,255,.18); text-align: center; letter-spacing: .06em; margin-bottom: 6px; }
+  .s3-result { background: #1c1208; border-radius: 8px 8px 0 0; padding: 6px 7px; border-top: .5px solid rgba(196,168,130,.15); margin-top: auto; }
+  .s3-ri { font-size: 11px; text-align: center; margin-bottom: 2px; }
+  .s3-rt { font-family: 'DM Serif Display', serif; font-size: 8px; color: rgba(255,255,255,.88); text-align: center; margin-bottom: 2px; }
+  .s3-rs { font-size: 4.5px; color: rgba(196,168,130,.6); text-align: center; margin-bottom: 4px; letter-spacing: .04em; }
+  .s3-rrow { display: flex; align-items: center; gap: 4px; background: rgba(196,168,130,.08); border-radius: 4px; padding: 3px 5px; margin-bottom: 4px; }
+  .s3-rem { font-size: 10px; }
+  .s3-rv { font-family: 'DM Serif Display', serif; font-size: 9px; color: rgba(255,255,255,.9); }
+  .s3-rl { font-size: 4.5px; color: rgba(196,168,130,.55); }
+  .s3-collect { width: 100%; padding: 4px; border: .5px solid rgba(196,168,130,.28); border-radius: 4px; font-size: 4.5px; color: rgba(196,168,130,.8); background: transparent; font-family: 'DM Mono', monospace; cursor: default; }
+
+  /* Screen 4 — Order Ready */
+  .s4 { background: #fdf8f3; }
+  .s4 .mock-sb { background: #fdf8f3; }
+  .s4 .mock-time { color: #b8a898; }
+  .s4 .mock-island { background: #18120a; }
+  .s4-body { flex: 1; padding: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; background: #fdf8f3; }
+  .s4-ey { font-size: 5px; color: #b8a898; letter-spacing: .14em; margin-bottom: 5px; }
+  .s4-h { font-family: 'DM Serif Display', serif; font-size: 14px; color: #3d2e1e; line-height: 1.15; margin-bottom: 2px; }
+  .s4-no { font-size: 5.5px; color: #c4a882; letter-spacing: .12em; margin-bottom: 8px; }
+  .s4-charm { margin-bottom: 4px; }
+  .s4-cn { font-family: 'DM Serif Display', serif; font-size: 7px; color: #9a8070; margin-bottom: 8px; letter-spacing: .06em; font-style: italic; }
+  .s4-rew { width: 100%; background: #fff9f4; border: .5px solid #e8ddd3; border-radius: 7px; padding: 5px 8px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+  .s4-rl { font-size: 5px; color: #9a8070; letter-spacing: .08em; margin-bottom: 1px; }
+  .s4-rv { font-family: 'DM Serif Display', serif; font-size: 10px; color: #3d2e1e; }
+  .s4-btn { width: 100%; padding: 5px; background: #3d2e1e; border: none; border-radius: 6px; font-size: 5.5px; color: #fdf8f3; letter-spacing: .08em; font-family: 'DM Mono', monospace; cursor: default; }
+
+  /* ── COMPETITIVE TABLE ── */
+  .comp-table { width: 100%; border-collapse: collapse; margin-top: 3rem; font-size: 14px; }
+  .comp-table th {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--mid-gray); padding: 0.75rem 1.25rem; text-align: left;
+    border-bottom: 1px solid rgba(14,14,13,0.12); font-weight: 400;
+  }
+  .comp-table td { padding: 1rem 1.25rem; border-bottom: 1px solid rgba(14,14,13,0.06); color: #3a3935; }
+  .comp-table tr:hover td { background: rgba(14,14,13,0.02); }
+  .comp-table tr.chado-row td { background: var(--tea-light); }
+  .comp-table tr.chado-row td:first-child { font-weight: 500; color: var(--tea); }
+  .check { color: var(--tea); }
+  .cross { color: var(--warm-gray); }
+  .partial { color: var(--amber); font-size: 13px; }
+
+  /* ── OUTCOMES ── */
+  .outcomes-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(14,14,13,0.1); margin-top: 3rem; }
+  .outcome-card { background: var(--white); padding: 2.5rem 2rem; }
+  .outcome-num { font-family: var(--mono); font-size: 11px; color: var(--tea); letter-spacing: 0.1em; margin-bottom: 1rem; }
+  .outcome-card h3 { font-family: var(--serif); font-size: 1.2rem; margin-bottom: 0.75rem; }
+  .outcome-card p { font-size: 14px; color: var(--mid-gray); margin-bottom: 0; }
+
+  /* ── REFLECTION ── */
+  .reflection-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-top: 3rem; }
+  .reflection-side h3 { font-family: var(--serif); font-size: 1.2rem; margin-bottom: 1.25rem; padding-bottom: 0.75rem; border-bottom: 1px solid rgba(14,14,13,0.1); }
+  .reflection-list { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+  .reflection-list li { font-size: 14px; color: #3a3935; padding-left: 1.25rem; position: relative; line-height: 1.6; }
+  .reflection-list li::before { position: absolute; left: 0; font-size: 12px; }
+  .what-worked li::before { content: '↑'; color: var(--tea); }
+  .what-next li::before { content: '→'; color: var(--amber); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--black); color: rgba(255,255,255,0.35);
+    padding: 3rem; display: flex; justify-content: space-between; align-items: center;
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em;
+  }
+  .footer-brand { color: rgba(255,255,255,0.6); }
+  .footer-links { display: flex; gap: 2rem; list-style: none; }
+  .footer-links a { color: rgba(255,255,255,0.35); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--tea-mid); }
+
+  /* ── SCROLL ANIMATIONS ── */
+  .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { min-height: 50vh; }
+    .problem-grid, .persona-grid, .reflection-grid, .logic-grid { grid-template-columns: 1fr; }
+    .findings-grid, .screen-showcase, .principles-grid, .outcomes-grid { grid-template-columns: 1fr 1fr; }
+    .journey-phases { grid-template-columns: 1fr; }
+    .logic-arrow { display: none; }
+    section { padding: 4rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-brand">CHADO — Pitch Pitch</a>
+  <ul class="nav-links">
+    <li><a href="#research">Research</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#design">Design</a></li>
+    <li><a href="#outcome">Outcome</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-left">
+    <div class="project-tag">Portfolio Project · Interaction Design · 2022</div>
+    <h1>CHADO<br><em>Pitch Pitch</em></h1>
+    <p class="hero-subtitle">A redesigned tea ordering app that transforms the frustrating bubble tea queue into an enjoyable brand experience — through DIY charm creation, AR reward scanning, and live order tracking.</p>
+    <div class="meta-row">
+      <div class="meta-item">
+        <div class="meta-label">Role</div>
+        <div class="meta-value">Individual project</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Type</div>
+        <div class="meta-value">Mobile app redesign</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Focus</div>
+        <div class="meta-value">Waiting UX · Brand retention</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <span class="hero-bg-text">茶</span>
+    <div class="tea-ring"></div>
+    <div class="tea-ring"></div>
+    <div class="tea-ring"></div>
+    <!-- Hero device SVG: phone showing CHADO waiting screen -->
+    <svg class="hero-device" viewBox="0 0 240 460" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Phone chassis -->
+      <rect x="28" y="10" width="184" height="440" rx="30" fill="#16100a" stroke="#2a1e10" stroke-width="1.5"/>
+      <!-- Dynamic island -->
+      <rect x="90" y="24" width="60" height="16" rx="8" fill="#080604"/>
+      <!-- Screen -->
+      <rect x="38" y="46" width="164" height="408" rx="22" fill="#fdf8f3"/>
+      <!-- Brand -->
+      <text x="120" y="78" fill="#c4a882" font-size="9" font-family="DM Serif Display, Georgia, serif" text-anchor="middle" letter-spacing="5">C H A D O</text>
+      <!-- Status bar time -->
+      <text x="52" y="62" fill="#b8a898" font-size="8" font-family="DM Mono, monospace">9:41</text>
+      <!-- Order block -->
+      <rect x="48" y="88" width="144" height="76" rx="12" fill="#fff9f4" stroke="#e8ddd3" stroke-width=".7"/>
+      <text x="62" y="104" fill="#b8a898" font-size="6.5" font-family="DM Mono, monospace" letter-spacing="1.5">YOUR ORDER</text>
+      <text x="62" y="148" fill="#3d2e1e" font-size="44" font-family="DM Serif Display, Georgia, serif" font-weight="300">12</text>
+      <text x="182" y="120" fill="#c4a882" font-size="24" font-family="DM Serif Display, Georgia, serif" text-anchor="end" font-weight="300">8</text>
+      <text x="182" y="134" fill="#b8a898" font-size="6" font-family="DM Mono, monospace" text-anchor="end" letter-spacing="1">MIN EST.</text>
+      <!-- Progress dots -->
+      <circle cx="60"  cy="180" r="4" fill="#c4a882"/>
+      <line x1="64" y1="180" x2="84" y2="180" stroke="#c4a882" stroke-width=".7"/>
+      <circle cx="88"  cy="180" r="4" fill="#c4a882"/>
+      <line x1="92" y1="180" x2="112" y2="180" stroke="#c4a882" stroke-width=".7"/>
+      <circle cx="116" cy="180" r="5" fill="#8b6b4a"/>
+      <line x1="121" y1="180" x2="142" y2="180" stroke="#edddd0" stroke-width=".7"/>
+      <circle cx="146" cy="180" r="4" fill="#edddd0"/>
+      <line x1="150" y1="180" x2="172" y2="180" stroke="#edddd0" stroke-width=".7"/>
+      <circle cx="176" cy="180" r="4" fill="#edddd0"/>
+      <!-- Step labels -->
+      <text x="60"  y="193" fill="#c4b4a8" font-size="6" font-family="DM Mono" text-anchor="middle">Order</text>
+      <text x="88"  y="193" fill="#c4b4a8" font-size="6" font-family="DM Mono" text-anchor="middle">Prep</text>
+      <text x="116" y="193" fill="#8b6b4a" font-size="6" font-family="DM Mono" text-anchor="middle">Making</text>
+      <text x="146" y="193" fill="#c4b4a8" font-size="6" font-family="DM Mono" text-anchor="middle">Pack</text>
+      <text x="176" y="193" fill="#c4b4a8" font-size="6" font-family="DM Mono" text-anchor="middle">Ready</text>
+      <!-- While you wait -->
+      <text x="48" y="212" fill="#b8a898" font-size="6.5" font-family="DM Mono, monospace" letter-spacing="1.5">WHILE YOU WAIT</text>
+      <!-- DIY tile -->
+      <rect x="48" y="220" width="68" height="82" rx="10" fill="#fff9f4" stroke="#e8ddd3" stroke-width=".7"/>
+      <!-- cup icon (simple SVG) -->
+      <path d="M76 232 L73 248 Q82 252 91 248 L88 232 Z" fill="#d4a574" opacity=".8"/>
+      <ellipse cx="82" cy="232" rx="12" ry="3" fill="#edddd0"/>
+      <line x1="88" y1="228" x2="86" y2="250" stroke="#c4a882" stroke-width="1.5" stroke-linecap="round" opacity=".7"/>
+      <text x="82" y="264" fill="#3d2e1e" font-size="8.5" font-family="DM Serif Display" text-anchor="middle">DIY Workshop</text>
+      <text x="82" y="274" fill="#9a8070" font-size="6" font-family="DM Mono" text-anchor="middle" letter-spacing=".5">Design charm</text>
+      <text x="82" y="288" fill="#c4a882" font-size="6.5" font-family="DM Mono" text-anchor="middle">Create →</text>
+      <!-- AR tile -->
+      <rect x="124" y="220" width="68" height="82" rx="10" fill="#fff9f4" stroke="#e8ddd3" stroke-width=".7"/>
+      <!-- AR icon: viewfinder corners -->
+      <path d="M152 232 L148 232 L148 236" stroke="#c4a882" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+      <path d="M164 232 L168 232 L168 236" stroke="#c4a882" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+      <path d="M152 250 L148 250 L148 246" stroke="#c4a882" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+      <path d="M164 250 L168 250 L168 246" stroke="#c4a882" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+      <text x="158" y="244" fill="#c4a882" font-size="7" text-anchor="middle" font-family="DM Mono">✦</text>
+      <text x="158" y="264" fill="#3d2e1e" font-size="8.5" font-family="DM Serif Display" text-anchor="middle">AR Scan</text>
+      <text x="158" y="274" fill="#9a8070" font-size="6" font-family="DM Mono" text-anchor="middle" letter-spacing=".5">Surprise reward</text>
+      <text x="158" y="288" fill="#c4a882" font-size="6.5" font-family="DM Mono" text-anchor="middle">Scan →</text>
+      <!-- Home indicator -->
+      <rect x="96" y="436" width="48" height="4" rx="2" fill="#c4a882" opacity=".25"/>
+    </svg>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- 01 — PROBLEM REFRAME -->
+<section id="problem">
+  <div class="problem-grid">
+    <div class="problem-left fade-up">
+      <div class="section-eyebrow">01 — Problem reframe</div>
+      <h2>The gap isn't<br>the queue itself.<br>It's the <em>dead time</em> inside it.</h2>
+      <p>Bubble tea brands compete fiercely on product and social media buzz — but the in-app experience is largely ignored. Users queue, scroll their phones aimlessly, and feel no connection to the brand while they wait.</p>
+      <p>The real opportunity isn't shortening the queue. It's <em>filling it</em> with something that builds loyalty, surprise, and emotional attachment to the brand.</p>
+      <p>The question Pitch Pitch asks: can waiting become a feature, not a flaw?</p>
+    </div>
+    <div class="problem-right fade-up">
+      <div class="stat-stack">
+        <div class="stat-card">
+          <div class="stat-number">46%</div>
+          <div class="stat-text">
+            <strong>Cite queue wait time as their top complaint</strong>
+            Questionnaire, n=54. Queuing system and staff attitude followed, each at 23.1%.
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">61%</div>
+          <div class="stat-text">
+            <strong>Want deals and member info while waiting</strong>
+            The single most wanted in-wait feature. Entertainment and Wi-Fi followed at 38.5% and 23.1%.
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">84%</div>
+          <div class="stat-text">
+            <strong>Decide where to visit via word of mouth</strong>
+            Brand experience — not just product quality — drives repeat visits and social recommendation.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="insight-callout fade-up">
+    <p>The wait isn't just a queue problem. It's a brand experience problem — and it begins the moment users open the app.</p>
+    <cite>— Core design problem, synthesised from user research + market observation</cite>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- 02 — RESEARCH (dark) -->
+<div class="research-section full-bleed" id="research">
+  <div class="research-inner">
+    <div class="section-eyebrow fade-up">02 — Research insights</div>
+    <h2 class="fade-up">Survey · Shadowing · Interviews.<br>What users actually experience.</h2>
+    <p class="fade-up" style="max-width: 620px; color: rgba(255,255,255,0.55);">A mixed-methods study: n=54 questionnaire (100% valid response rate) plus in-store shadowing at two outlet types (indoor brand and street kiosk) and three in-depth interviews with regular tea drinkers.</p>
+
+    <div class="findings-grid">
+      <div class="finding-card fade-up">
+        <div class="finding-stat">20 min</div>
+        <div class="finding-name">Queue tolerance ceiling</div>
+        <div class="finding-desc">84.6% of users tolerate waits up to 20 minutes. Beyond that, brand loyalty alone cannot hold them. The clock is ticking from the moment they join the queue.</div>
+        <span class="finding-tag">Behavioural threshold</span>
+      </div>
+      <div class="finding-card fade-up">
+        <div class="finding-stat">QR</div>
+        <div class="finding-name">Digital ordering is praised</div>
+        <div class="finding-desc">Shadowing revealed that QR code pre-ordering — available at one of two outlets — was consistently praised. It reduces perceived wait and shifts the locus of control to the user.</div>
+        <span class="finding-tag">Validated pattern</span>
+      </div>
+      <div class="finding-card fade-up">
+        <div class="finding-stat">0</div>
+        <div class="finding-name">In-wait brand engagement</div>
+        <div class="finding-desc">Neither outlet provided any brand touchpoint during the wait. Users defaulted to scrolling phones — with no connection to the tea brand they were waiting for. A clear design vacuum.</div>
+        <span class="finding-tag">Gap identified</span>
+      </div>
+      <div class="finding-card fade-up">
+        <div class="finding-stat">✦</div>
+        <div class="finding-name">Small gestures matter most</div>
+        <div class="finding-desc">Shadowing note: at the kiosk, staff carefully inserted straws and checked dine-in preference. These small moments of care erased earlier frustrations — net experience ended positive despite a difficult wait.</div>
+        <span class="finding-tag">Delight mechanism</span>
+      </div>
+    </div>
+
+    <div class="research-note fade-up">
+      <div class="note-icon">⚠</div>
+      <p class="note-text"><strong>Research scope note:</strong> The questionnaire sample (n=54) skewed <strong>76% female and 73.7% office workers</strong> — reflecting the brand's actual core demographic but limiting generalisability. Shadowing was conducted at peak hour (weekend indoor) and weekday afternoon (kiosk). Interview findings are directional, not statistically validated. Design decisions treat these as <strong>signals to design toward</strong>, not fixed facts.</p>
+    </div>
+  </div>
+</div>
+
+<!-- 03 — FEATURE LOGIC -->
+<div class="logic-strip full-bleed" id="features">
+  <div class="logic-inner">
+    <div class="section-eyebrow fade-up">03 — Feature logic</div>
+    <h2 class="fade-up">Two features.<br>One continuous thread.</h2>
+    <p class="fade-up" style="max-width: 580px;">The design adds two features to the wait experience, each serving a distinct emotional need — but connected by a single object: the user's DIY charm.</p>
+
+    <div class="logic-grid">
+      <div class="logic-panel fade-up">
+        <div class="logic-moment">During the wait</div>
+        <h3>"Give me something to do with my time."</h3>
+        <ul class="signal-list">
+          <li>
+            <span class="signal-marker">→</span>
+            <span class="signal-text"><strong>DIY Workshop</strong> — users choose a base tea, add-ins, and toppings to build a personalised virtual charm. 3-step creation, real-time cup preview, custom naming.</span>
+          </li>
+          <li>
+            <span class="signal-marker">→</span>
+            <span class="signal-text"><strong>AR Scan</strong> — camera-based scan of any environment triggers one of several pre-built animated effects. Each scan has a random probability of unlocking a reward.</span>
+          </li>
+          <li>
+            <span class="signal-marker">→</span>
+            <span class="signal-text"><strong>DIY charm in AR</strong> — user can optionally place their created charm into the AR scene, making the two features interact through a single personal object.</span>
+          </li>
+        </ul>
+        <div class="output-pill">
+          <span class="pill pill-charm">Personal charm</span>
+          <span class="pill pill-reward">Random reward</span>
+        </div>
+      </div>
+
+      <div class="logic-arrow">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style="color: var(--warm-gray);">
+          <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <div class="logic-panel fade-up">
+        <div class="logic-moment">At collection — and beyond</div>
+        <h3>"Make collecting my order feel like a moment."</h3>
+        <ul class="signal-list">
+          <li>
+            <span class="signal-marker">→</span>
+            <span class="signal-text"><strong>Charm reveal at pickup</strong> — the DIY charm appears on the order-ready screen alongside any AR rewards earned, creating a small reveal ritual rather than a plain notification.</span>
+          </li>
+          <li>
+            <span class="signal-marker">→</span>
+            <span class="signal-text"><strong>Points accumulation</strong> — both DIY creation and AR scans earn points. Accumulated points can be redeemed for real drinks, tying digital play to tangible product reward.</span>
+          </li>
+          <li>
+            <span class="signal-marker">→</span>
+            <span class="signal-text"><strong>Competition mechanic</strong> — occasional brand-run charm contests give the DIY feature a social and competitive dimension, extending retention beyond the visit.</span>
+          </li>
+        </ul>
+        <div class="output-pill">
+          <span class="pill pill-go">Brand stickiness</span>
+          <span class="pill pill-reward">Real drink unlock</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- 04 — USER RESEARCH -->
+<section>
+  <div class="section-eyebrow fade-up">04 — User research</div>
+  <h2 class="fade-up">One shared frustration<br>across every profile.</h2>
+  <p class="fade-up" style="max-width: 600px;">Whether a casual visitor or a loyal regular, users universally lacked visibility and engagement during their wait. The difference was only how acutely they felt it.</p>
+
+  <div class="persona-grid">
+    <div class="persona-card fade-up">
+      <div class="persona-header">
+        <div>
+          <div class="persona-name">Suri, 28</div>
+          <div class="persona-role">Educator · Regular tea drinker · Visits with friends</div>
+        </div>
+        <span class="persona-badge">Primary persona</span>
+      </div>
+      <p class="persona-quote">"I want to enjoy my tea quickly, in a relaxed atmosphere."</p>
+      <div class="tag-section-label">Goals</div>
+      <div class="tag-row">
+        <span class="goal-tag">Live order status</span>
+        <span class="goal-tag">Entertainment</span>
+        <span class="goal-tag">Timely offers</span>
+        <span class="goal-tag">Nearby suggestions</span>
+      </div>
+      <div class="tag-section-label">Frustrations</div>
+      <div class="tag-row">
+        <span class="pain-tag">Boring queues</span>
+        <span class="pain-tag">No seating info</span>
+        <span class="pain-tag">Unknown progress</span>
+        <span class="pain-tag">Missed deals</span>
+      </div>
+      <p class="persona-insight">Uses digital ordering and decides by word of mouth. Decides where to go based on brand experience as much as product. Shares moments with friends on social media — the brand has natural social shareability it isn't using.</p>
+    </div>
+    <div class="persona-card fade-up">
+      <div class="persona-header">
+        <div>
+          <div class="persona-name">Fang, 30</div>
+          <div class="persona-role">Office worker · Biweekly visitor · Light flavour preference</div>
+        </div>
+        <span class="persona-badge">Secondary persona</span>
+      </div>
+      <p class="persona-quote">"Too long a wait, no seating, nothing to do while waiting."</p>
+      <div class="tag-section-label">Goals</div>
+      <div class="tag-row">
+        <span class="goal-tag">Free customisation</span>
+        <span class="goal-tag">Timely offers</span>
+        <span class="goal-tag">Order reminders</span>
+      </div>
+      <div class="tag-section-label">Frustrations</div>
+      <div class="tag-row">
+        <span class="pain-tag">No queue guidance</span>
+        <span class="pain-tag">Quality anxiety</span>
+        <span class="pain-tag">Chaotic flow</span>
+      </div>
+      <p class="persona-insight">Visits less frequently but represents the user most likely to be lost to a competitor during a bad wait. Not knowing the production process creates anxiety about order quality — live progress tracking directly addresses this.</p>
+    </div>
+  </div>
+
+  <div class="interview-strip fade-up">
+    <div class="interview-item">
+      <div class="interviewee">Meng, 27 — Teacher · Natural fruit tea · Every 3 days</div>
+      <p class="interview-quote">"I want to sit down and drink as soon as possible."</p>
+      <p class="interview-finding">Long queues combined with limited space and inconsistent execution create accumulated frustration. The bottleneck is perceived time lost — not absolute wait duration. Design response: visible progress plus meaningful activity.</p>
+    </div>
+    <div class="interview-item">
+      <div class="interviewee">Pei, 31 — Manager · Healthy fruit tea · Weekly</div>
+      <p class="interview-quote">"Fast service, recommendations, Wi-Fi and deals while waiting."</p>
+      <p class="interview-finding">Represents the customer most sensitive to brand quality signals. Concerns about excess additives and misleading ads suggest trust is fragile. The Pitch Pitch feature set must earn engagement, not demand it — hence random AR rewards over guaranteed ones.</p>
+    </div>
+    <div class="interview-item">
+      <div class="interviewee">Fang, 30 — Office Worker · Light flavour · Biweekly</div>
+      <p class="interview-quote">"No queue guidance — chaotic flow degrades the experience."</p>
+      <p class="interview-finding">Not knowing the production process creates quality anxiety distinct from impatience. Live production step tracking directly resolves this: users see exactly where their order is, eliminating the uncertainty that compounds waiting frustration.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 05 — JOURNEY MAP -->
+<div class="journey-section full-bleed">
+  <div class="journey-inner">
+    <div class="section-eyebrow fade-up">05 — User journey</div>
+    <h2 class="fade-up">Where Pitch Pitch<br>intervenes across the visit.</h2>
+
+    <div class="journey-phases">
+      <div class="phase fade-up">
+        <div class="phase-label">Arrive &amp; order</div>
+        <ul class="phase-actions">
+          <li>Scan QR code at store</li>
+          <li>Browse menu, customise order</li>
+          <li>Pay and receive queue number</li>
+        </ul>
+        <div class="phase-pain">Pain point: no order visibility after paying. User is left without information about their position or production status.</div>
+        <div class="phase-chado"><strong>Pitch Pitch:</strong> Live queue position displayed immediately after order. Production steps visible in real time, reducing post-order anxiety.</div>
+      </div>
+      <div class="phase fade-up">
+        <div class="phase-label">Wait &amp; engage</div>
+        <ul class="phase-actions">
+          <li>Check order progress periodically</li>
+          <li>Enter DIY Workshop to build charm</li>
+          <li>Trigger AR scan for surprise reward</li>
+        </ul>
+        <div class="phase-pain">Pain point: no brand touchpoint during wait. Users scroll phones with no connection to the brand they are waiting for — loyalty opportunity completely missed.</div>
+        <div class="phase-chado"><strong>Pitch Pitch:</strong> DIY Workshop and AR Scan turn wait time into creative, reward-linked play. Engagement is voluntary — not forced — preserving user autonomy.</div>
+      </div>
+      <div class="phase fade-up">
+        <div class="phase-label">Collect &amp; beyond</div>
+        <ul class="phase-actions">
+          <li>Receive pickup notification</li>
+          <li>View charm reveal at collection</li>
+          <li>Save charm, collect points</li>
+        </ul>
+        <div class="phase-pain">Pain point: collection is transactional with no emotional payoff. Users leave with their drink but no reason to re-engage with the brand digitally.</div>
+        <div class="phase-chado"><strong>Pitch Pitch:</strong> Charm reveal at pickup creates a small ritual. Points accumulate toward real drink rewards — creating a loop that extends engagement beyond the visit.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 06 — DESIGN PRINCIPLES -->
+<section>
+  <div class="section-eyebrow fade-up">06 — Design principles</div>
+  <h2 class="fade-up">Three principles that shaped<br>every interaction decision.</h2>
+
+  <div class="principles-grid">
+    <div class="principle fade-up">
+      <div class="principle-number">P.01</div>
+      <h3>Waiting should have a purpose</h3>
+      <p>Dead time is the enemy of brand loyalty. Every minute in the queue is an opportunity to create something — a charm, a memory, a reward. The design converts passive waiting into active play without making participation mandatory.</p>
+    </div>
+    <div class="principle fade-up">
+      <div class="principle-number">P.02</div>
+      <h3>Surprise beats certainty</h3>
+      <p>Guaranteed rewards create entitlement; random ones create delight. The AR scan is designed so that a no-reward scan still delivers a visual payoff — the surprise of getting nothing is only acceptable if the experience itself was worth having.</p>
+    </div>
+    <div class="principle fade-up">
+      <div class="principle-number">P.03</div>
+      <h3>The charm is the thread</h3>
+      <p>The DIY charm is not a standalone feature — it's the connective tissue linking DIY creation, AR display, pickup reveal, and points redemption. One object earns its place across the entire experience arc rather than existing as an isolated widget.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- 07 — KEY SCREENS -->
+<div class="screens-section full-bleed" id="design">
+  <div class="screens-inner">
+    <div class="section-eyebrow fade-up">07 — Key screens</div>
+    <h2 class="fade-up">Four screens across<br>the waiting experience.</h2>
+    <p class="fade-up">Each screen owns a specific moment. The visual language — warm beige, Cormorant serif, hairline strokes — is consistent across all states, from functional progress tracking to playful charm creation.</p>
+
+    <div class="screen-showcase">
+
+      <!-- Screen 1: Waiting Home -->
+      <div class="screen-item fade-up">
+        <div class="screen-frame">
+          <div class="mock-phone s1">
+            <div class="mock-sb s1">
+              <span class="mock-time">9:41</span>
+              <div class="mock-island"></div>
+              <span class="mock-time">●●●</span>
+            </div>
+            <div class="s1-body">
+              <div class="s1-brand">C H A D O</div>
+              <div class="s1-order">
+                <div>
+                  <div class="s1-lbl">YOUR ORDER</div>
+                  <div class="s1-num">12</div>
+                  <div class="s1-hint">tap to preview →</div>
+                </div>
+                <div>
+                  <div class="s1-est-n">8</div>
+                  <div class="s1-est-l">MIN EST.</div>
+                </div>
+              </div>
+              <div class="s1-prog">
+                <div class="s1-dots">
+                  <div class="s1-d d"></div><div class="s1-l d"></div>
+                  <div class="s1-d d"></div><div class="s1-l d"></div>
+                  <div class="s1-d a"></div><div class="s1-l"></div>
+                  <div class="s1-d"></div><div class="s1-l"></div>
+                  <div class="s1-d"></div>
+                </div>
+                <div class="s1-dlbls">
+                  <span class="s1-dl">Order</span>
+                  <span class="s1-dl">Prep</span>
+                  <span class="s1-dl a">Making</span>
+                  <span class="s1-dl">Pack</span>
+                  <span class="s1-dl">Ready</span>
+                </div>
+              </div>
+              <div class="s1-wyw">WHILE YOU WAIT</div>
+              <div class="s1-tiles">
+                <div class="s1-tile">
+                  <div class="s1-ti">🧋</div>
+                  <div class="s1-tt">DIY Workshop</div>
+                  <div class="s1-ts">Design your tea charm</div>
+                  <div class="s1-tc">Create →</div>
+                </div>
+                <div class="s1-tile">
+                  <div class="s1-ti">✦</div>
+                  <div class="s1-tt">AR Scan</div>
+                  <div class="s1-ts">Scan for a surprise</div>
+                  <div class="s1-tc">Scan →</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="screen-label">Waiting</div>
+        <div class="screen-name">Home</div>
+        <div class="screen-desc">Live order progress with two feature entry points</div>
+      </div>
+
+      <!-- Screen 2: DIY Workshop -->
+      <div class="screen-item fade-up">
+        <div class="screen-frame">
+          <div class="mock-phone s2">
+            <div class="mock-sb s2">
+              <span class="mock-time">9:41</span>
+              <div class="mock-island"></div>
+              <span class="mock-time"></span>
+            </div>
+            <div class="s2-body">
+              <div class="s2-nb">
+                <div class="s2-back">
+                  <svg viewBox="0 0 8 8" fill="none"><path d="M6 1.5L2 4l4 2.5" stroke="#9a8070" stroke-width=".9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div class="s2-nbt">DIY WORKSHOP</div>
+              </div>
+              <!-- Inline cup SVG -->
+              <div class="s2-cup">
+                <svg viewBox="0 0 60 76" width="60" height="76">
+                  <defs><clipPath id="mc"><path d="M10,16 L7,62 Q30,70 53,62 L50,16 Z"/></clipPath></defs>
+                  <rect clip-path="url(#mc)" x="0" y="0" width="60" height="76" fill="#d4a574"/>
+                  <g clip-path="url(#mc)">
+                    <circle cx="17" cy="58" r="3" fill="#5c3d1e"/>
+                    <circle cx="23" cy="61" r="3" fill="#5c3d1e"/>
+                    <circle cx="29" cy="58" r="3" fill="#5c3d1e"/>
+                    <circle cx="35" cy="61" r="3" fill="#5c3d1e"/>
+                    <circle cx="41" cy="58" r="3" fill="#5c3d1e"/>
+                  </g>
+                  <path d="M10,16 L7,62 Q30,70 53,62 L50,16 Z" fill="none" stroke="#ddd0c4" stroke-width=".7"/>
+                  <ellipse cx="30" cy="16" rx="20" ry="5" fill="#edddd0"/>
+                  <ellipse cx="30" cy="16" rx="20" ry="5" fill="none" stroke="#ddd0c4" stroke-width=".5"/>
+                  <line x1="41" y1="3" x2="37" y2="68" stroke="#c4a882" stroke-width="1.8" stroke-linecap="round" opacity=".65"/>
+                  <circle cx="30" cy="3" r="3" fill="none" stroke="#c4a882" stroke-width=".8"/>
+                  <circle cx="30" cy="0" r="1.2" fill="#c4a882"/>
+                </svg>
+              </div>
+              <div class="s2-tabs">
+                <div class="s2-tab on">BASE</div>
+                <div class="s2-tab">TOPPINGS</div>
+                <div class="s2-tab">NAME IT</div>
+              </div>
+              <div class="s2-slbl">CHOOSE BASE TEA</div>
+              <div class="s2-opts">
+                <div class="s2-opt on"><div class="s2-sw" style="background:#d4a574"></div><div class="s2-on">Oolong</div></div>
+                <div class="s2-opt"><div class="s2-sw" style="background:#dfd0a0"></div><div class="s2-on">Jasmine</div></div>
+                <div class="s2-opt"><div class="s2-sw" style="background:#8bb86a"></div><div class="s2-on">Matcha</div></div>
+                <div class="s2-opt"><div class="s2-sw" style="background:#e0a0a8"></div><div class="s2-on">Rose</div></div>
+              </div>
+              <button class="s2-save">SAVE CHARM</button>
+            </div>
+          </div>
+        </div>
+        <div class="screen-label">Waiting — Create</div>
+        <div class="screen-name">DIY Workshop</div>
+        <div class="screen-desc">Select base, toppings, name — cup preview updates live</div>
+      </div>
+
+      <!-- Screen 3: AR Scan -->
+      <div class="screen-item fade-up">
+        <div class="screen-frame">
+          <div class="mock-phone s3">
+            <div class="mock-sb s3">
+              <span class="mock-time" style="color:rgba(255,255,255,.3)">9:41</span>
+              <div class="mock-island"></div>
+              <span class="mock-time"></span>
+            </div>
+            <div class="s3-body">
+              <div class="s3-nb">
+                <div class="s3-back">
+                  <svg viewBox="0 0 8 8" fill="none"><path d="M6 1.5L2 4l4 2.5" stroke="rgba(255,255,255,.45)" stroke-width=".9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div class="s3-nbt">AR SCAN</div>
+              </div>
+              <div class="s3-vf">
+                <div class="s3-corner s3-ctl"></div>
+                <div class="s3-corner s3-ctr"></div>
+                <div class="s3-corner s3-cbl"></div>
+                <div class="s3-corner s3-cbr"></div>
+                <div class="s3-vfl">POINT ANYWHERE</div>
+              </div>
+              <div class="s3-btn">SCAN</div>
+              <div class="s3-sub">3 scans remaining today</div>
+              <div class="s3-result">
+                <div class="s3-ri">🎉</div>
+                <div class="s3-rt">Lucky Draw!</div>
+                <div class="s3-rs">You unlocked a reward</div>
+                <div class="s3-rrow">
+                  <div class="s3-rem">🎟</div>
+                  <div>
+                    <div class="s3-rl">REWARD</div>
+                    <div class="s3-rv">10% Off</div>
+                  </div>
+                </div>
+                <button class="s3-collect">COLLECT &amp; CLOSE</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="screen-label">Waiting — Surprise</div>
+        <div class="screen-name">AR Scan</div>
+        <div class="screen-desc">Scan any environment · Random reward reveal</div>
+      </div>
+
+      <!-- Screen 4: Order Ready -->
+      <div class="screen-item fade-up">
+        <div class="screen-frame">
+          <div class="mock-phone s4">
+            <div class="mock-sb s4">
+              <span class="mock-time">9:58</span>
+              <div class="mock-island"></div>
+              <span class="mock-time">●●●</span>
+            </div>
+            <div class="s4-body">
+              <div class="s4-ey">ORDER COMPLETE</div>
+              <div class="s4-h">Your order<br>is ready</div>
+              <div class="s4-no">NO. 12</div>
+              <div class="s4-charm">
+                <svg viewBox="0 0 60 76" width="52" height="66">
+                  <defs><clipPath id="mc2"><path d="M10,16 L7,62 Q30,70 53,62 L50,16 Z"/></clipPath></defs>
+                  <rect clip-path="url(#mc2)" x="0" y="0" width="60" height="76" fill="#d4a574"/>
+                  <g clip-path="url(#mc2)">
+                    <circle cx="17" cy="58" r="3" fill="#5c3d1e"/>
+                    <circle cx="23" cy="61" r="3" fill="#5c3d1e"/>
+                    <circle cx="29" cy="58" r="3" fill="#5c3d1e"/>
+                    <circle cx="35" cy="61" r="3" fill="#5c3d1e"/>
+                    <circle cx="41" cy="58" r="3" fill="#5c3d1e"/>
+                  </g>
+                  <path d="M10,16 L7,62 Q30,70 53,62 L50,16 Z" fill="none" stroke="#ddd0c4" stroke-width=".7"/>
+                  <ellipse cx="30" cy="16" rx="20" ry="5" fill="#edddd0"/>
+                  <ellipse cx="30" cy="16" rx="20" ry="5" fill="none" stroke="#ddd0c4" stroke-width=".5"/>
+                  <line x1="41" y1="3" x2="37" y2="68" stroke="#c4a882" stroke-width="1.8" stroke-linecap="round" opacity=".65"/>
+                  <circle cx="30" cy="3" r="3" fill="none" stroke="#c4a882" stroke-width=".8"/>
+                  <circle cx="30" cy="0" r="1.2" fill="#c4a882"/>
+                </svg>
+              </div>
+              <div class="s4-cn">Autumn Sip</div>
+              <div class="s4-rew">
+                <div>
+                  <div class="s4-rl">TODAY'S REWARD</div>
+                  <div class="s4-rv">+ 50 pts</div>
+                </div>
+                <span style="font-size:10px;color:#c4a882">✦</span>
+              </div>
+              <button class="s4-btn">COLLECT MY ORDER</button>
+            </div>
+          </div>
+        </div>
+        <div class="screen-label">Pickup</div>
+        <div class="screen-name">Order ready</div>
+        <div class="screen-desc">Charm reveal + reward summary at the pickup moment</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- 08 — COMPETITIVE POSITIONING -->
+<section id="outcome">
+  <div class="section-eyebrow fade-up">08 — Competitive positioning</div>
+  <h2 class="fade-up">Not a better ordering app.<br>A different experience layer.</h2>
+  <p class="fade-up" style="max-width: 620px;">Existing tea and coffee apps solve the transactional layer well. Pitch Pitch's position is the experiential layer that competitors leave entirely empty — the time between order and collection.</p>
+
+  <table class="comp-table fade-up">
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Mobile ordering</th>
+        <th>Live order tracking</th>
+        <th>In-wait engagement</th>
+        <th>AR experience</th>
+        <th>Personalisation play</th>
+        <th>Reward loop</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>HeyTea</td>
+        <td><span class="check">✓</span></td>
+        <td><span class="check">✓</span></td>
+        <td><span class="cross">—</span></td>
+        <td><span class="cross">—</span></td>
+        <td><span class="partial">Partial</span></td>
+        <td><span class="partial">Partial</span></td>
+      </tr>
+      <tr>
+        <td>Nayuki</td>
+        <td><span class="check">✓</span></td>
+        <td><span class="check">✓</span></td>
+        <td><span class="cross">—</span></td>
+        <td><span class="cross">—</span></td>
+        <td><span class="cross">—</span></td>
+        <td><span class="check">✓</span></td>
+      </tr>
+      <tr>
+        <td>Starbucks</td>
+        <td><span class="check">✓</span></td>
+        <td><span class="partial">Partial</span></td>
+        <td><span class="cross">—</span></td>
+        <td><span class="cross">—</span></td>
+        <td><span class="partial">Partial</span></td>
+        <td><span class="check">✓</span></td>
+      </tr>
+      <tr>
+        <td>Generic F&amp;B mini-programs</td>
+        <td><span class="check">✓</span></td>
+        <td><span class="cross">—</span></td>
+        <td><span class="cross">—</span></td>
+        <td><span class="cross">—</span></td>
+        <td><span class="cross">—</span></td>
+        <td><span class="cross">—</span></td>
+      </tr>
+      <tr class="chado-row">
+        <td>CHADO — Pitch Pitch</td>
+        <td><span class="check">✓</span></td>
+        <td><span class="check">✓</span></td>
+        <td><span class="check">✓</span></td>
+        <td><span class="check">✓</span></td>
+        <td><span class="check">✓</span></td>
+        <td><span class="check">✓</span></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<hr class="divider">
+
+<!-- 09 — OUTCOMES -->
+<section>
+  <div class="section-eyebrow fade-up">09 — Design outcomes</div>
+  <h2 class="fade-up">What Pitch Pitch delivers.</h2>
+
+  <div class="outcomes-grid">
+    <div class="outcome-card fade-up">
+      <div class="outcome-num">01</div>
+      <h3>Live progress tracking</h3>
+      <p>Real-time production step visibility eliminates the anxiety of not knowing. Five production stages are visible in-app from the moment of order — reducing perceived wait time and quality uncertainty simultaneously.</p>
+    </div>
+    <div class="outcome-card fade-up">
+      <div class="outcome-num">02</div>
+      <h3>DIY Workshop + AR Scan</h3>
+      <p>Two interlinked wait-time features — charm creation and AR scanning — turn passive queuing into active brand engagement. The DIY charm acts as a connective thread across both features and the pickup moment.</p>
+    </div>
+    <div class="outcome-card fade-up">
+      <div class="outcome-num">03</div>
+      <h3>Integrated reward loop</h3>
+      <p>Points earned through DIY creation, AR scans, and visits accumulate toward real drink rewards. Occasional charm competitions extend engagement beyond individual visits, creating a reason to return beyond the product itself.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 10 — REFLECTION -->
+<section style="background: #f2f0ea; max-width: none; padding: 6rem 0;">
+  <div style="max-width: 1100px; margin: 0 auto; padding: 0 3rem;">
+    <div class="section-eyebrow fade-up">10 — Reflection</div>
+    <h2 class="fade-up">What worked.<br>What I'd do differently.</h2>
+
+    <div class="reflection-grid">
+      <div class="reflection-side fade-up">
+        <h3>What worked</h3>
+        <ul class="reflection-list what-worked">
+          <li>Reframing the wait as an opportunity — rather than a problem to minimise — unlocked a completely different solution space. The constraint became the brief.</li>
+          <li>Grounding the DIY feature as non-transactional (charm for fun, not a live order) removed friction from the concept and made the experience feel genuinely playful rather than utilitarian.</li>
+          <li>The random AR reward mechanism preserves surprise value in a way guaranteed rewards never could. The 38% no-reward rate only works if the visual experience itself is worth having — which kept quality standards high throughout design.</li>
+          <li>Research triangulation — survey, shadowing, and interview across two outlet types — surfaced the small-gesture finding (straw insertion, dine-in check) that directly informed the pickup reveal ritual.</li>
+        </ul>
+      </div>
+      <div class="reflection-side fade-up">
+        <h3>If I continued this project</h3>
+        <ul class="reflection-list what-next">
+          <li>Validate whether the DIY charm actually increases brand recall and return visit rate — the emotional attachment hypothesis needs user testing with real prototypes across multiple visits.</li>
+          <li>Test the AR scan frequency cap (3 per day) against real user behaviour — the limit protects reward scarcity but may frustrate users who want to play more, especially during longer waits.</li>
+          <li>Design a seasonal charm system tied to product launches — limited edition charms released with new drinks would create organic social sharing moments beyond the app.</li>
+          <li>Explore whether the charm data (flavour preferences, creation patterns) could inform personalised product recommendations — closing a loop between play and purchase intent.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-brand">CHADO — Pitch Pitch · Portfolio case study · 2022</span>
+  <ul class="footer-links">
+    <li><a href="#problem">Problem</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#design">Design</a></li>
+    <li><a href="#outcome">Outcome</a></li>
+  </ul>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.fade-up').forEach((el) => {
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SOMA SweatSense — Portfolio Case Study</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400&family=Instrument+Sans:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0e0e0d;
+    --white: #f7f6f2;
+    --warm-gray: #c8c4b8;
+    --mid-gray: #7a7870;
+    --teal: #1a6b5a;
+    --teal-light: #e4f0ed;
+    --teal-mid: #4a9b87;
+    --amber: #c8831a;
+    --amber-light: #fdf3e3;
+    --red-soft: #c44a2e;
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: 'Instrument Sans', sans-serif;
+    --mono: 'DM Mono', monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--white);
+    color: var(--black);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.65;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 3rem;
+    background: rgba(247,246,242,0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(14,14,13,0.08);
+  }
+  .nav-brand {
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    color: var(--mid-gray);
+    text-decoration: none;
+  }
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+  .nav-links a {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--mid-gray);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--black); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 80px;
+  }
+  .hero-left {
+    padding: 6rem 3rem 4rem 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .project-tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .project-tag::before {
+    content: '';
+    display: inline-block;
+    width: 24px;
+    height: 1px;
+    background: var(--teal);
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(3rem, 5vw, 4.5rem);
+    line-height: 1.08;
+    margin-bottom: 0.5rem;
+    color: var(--black);
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--teal);
+  }
+  .hero-subtitle {
+    font-size: 1.05rem;
+    color: var(--mid-gray);
+    max-width: 380px;
+    margin: 1.5rem 0 2.5rem;
+    line-height: 1.7;
+  }
+  .meta-row {
+    display: flex;
+    gap: 2.5rem;
+    border-top: 1px solid rgba(14,14,13,0.1);
+    padding-top: 1.5rem;
+  }
+  .meta-item {}
+  .meta-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--warm-gray);
+    margin-bottom: 0.25rem;
+  }
+  .meta-value {
+    font-size: 13px;
+    color: var(--mid-gray);
+  }
+
+  .hero-right {
+    background: var(--black);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .hero-device {
+    width: 280px;
+    position: relative;
+    z-index: 2;
+    animation: float 6s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+  .hero-bg-text {
+    position: absolute;
+    font-family: var(--serif);
+    font-size: 180px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.04);
+    letter-spacing: -0.02em;
+    user-select: none;
+    line-height: 1;
+  }
+  .sweat-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(74,155,135,0.2);
+    animation: pulse-ring 4s ease-in-out infinite;
+  }
+  .sweat-ring:nth-child(1) { width: 200px; height: 200px; animation-delay: 0s; }
+  .sweat-ring:nth-child(2) { width: 320px; height: 320px; animation-delay: 0.8s; }
+  .sweat-ring:nth-child(3) { width: 440px; height: 440px; animation-delay: 1.6s; }
+  @keyframes pulse-ring {
+    0%, 100% { opacity: 0.2; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(1.04); }
+  }
+
+  /* ── SECTIONS ── */
+  section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 6rem 3rem;
+  }
+  section.full-bleed {
+    max-width: none;
+    padding: 0;
+  }
+
+  .section-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .section-eyebrow::before {
+    content: '';
+    width: 20px;
+    height: 1px;
+    background: var(--teal);
+    display: inline-block;
+  }
+
+  h2 {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 3.5vw, 2.8rem);
+    line-height: 1.15;
+    margin-bottom: 1.5rem;
+  }
+  h3 {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    margin-bottom: 0.75rem;
+  }
+  p { margin-bottom: 1rem; color: #3a3935; }
+  p:last-child { margin-bottom: 0; }
+
+  /* ── DIVIDER ── */
+  .divider {
+    border: none;
+    border-top: 1px solid rgba(14,14,13,0.08);
+    margin: 0;
+  }
+
+  /* ── PROBLEM SECTION ── */
+  .problem-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+  .problem-left {}
+  .problem-right {}
+  .stat-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    background: rgba(14,14,13,0.08);
+  }
+  .stat-card {
+    background: var(--white);
+    padding: 1.5rem 2rem;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1.5rem;
+    align-items: center;
+  }
+  .stat-number {
+    font-family: var(--serif);
+    font-size: 3rem;
+    color: var(--teal);
+    line-height: 1;
+  }
+  .stat-text {
+    font-size: 14px;
+    color: var(--mid-gray);
+    line-height: 1.5;
+  }
+  .stat-text strong {
+    display: block;
+    color: var(--black);
+    font-weight: 500;
+    margin-bottom: 0.2rem;
+  }
+
+  .insight-callout {
+    background: var(--black);
+    color: var(--white);
+    padding: 2.5rem 3rem;
+    margin-top: 3rem;
+    position: relative;
+  }
+  .insight-callout::before {
+    content: '"';
+    font-family: var(--serif);
+    font-size: 8rem;
+    color: var(--teal);
+    position: absolute;
+    top: -1rem;
+    left: 2rem;
+    line-height: 1;
+    opacity: 0.4;
+  }
+  .insight-callout p {
+    color: var(--white);
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    line-height: 1.5;
+    position: relative;
+    z-index: 1;
+  }
+  .insight-callout cite {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--teal-mid);
+    font-style: normal;
+    display: block;
+    margin-top: 1rem;
+  }
+
+  /* ── SCIENCE SECTION ── */
+  .science-section {
+    background: #111210;
+    color: var(--white);
+    padding: 6rem 0;
+  }
+  .science-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 3rem;
+  }
+  .science-section h2, .science-section .section-eyebrow {
+    color: var(--white);
+  }
+  .science-section .section-eyebrow::before {
+    background: var(--teal-mid);
+  }
+  .science-section .section-eyebrow {
+    color: var(--teal-mid);
+  }
+  .biomarker-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: rgba(255,255,255,0.06);
+    margin: 3rem 0;
+  }
+  .biomarker-card {
+    background: #111210;
+    padding: 2rem 1.5rem;
+    border-top: 2px solid transparent;
+    transition: border-color 0.3s;
+  }
+  .biomarker-card:hover { border-color: var(--teal-mid); }
+  .biomarker-symbol {
+    font-family: var(--mono);
+    font-size: 1.6rem;
+    color: var(--teal-mid);
+    margin-bottom: 1rem;
+    font-weight: 300;
+  }
+  .biomarker-name {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+  }
+  .biomarker-role {
+    font-size: 13px;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.5;
+    margin-bottom: 0;
+  }
+  .biomarker-tag {
+    display: inline-block;
+    margin-top: 1rem;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.6rem;
+    border: 1px solid rgba(74,155,135,0.3);
+    color: var(--teal-mid);
+    border-radius: 2px;
+  }
+  .science-caveat {
+    border: 1px solid rgba(200,131,26,0.3);
+    background: rgba(200,131,26,0.06);
+    padding: 1.5rem 2rem;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1.5rem;
+    align-items: start;
+  }
+  .caveat-icon {
+    font-size: 1.2rem;
+    margin-top: 0.1rem;
+  }
+  .caveat-text {
+    font-size: 14px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.6;
+    margin-bottom: 0;
+  }
+  .caveat-text strong {
+    color: var(--amber);
+    font-weight: 500;
+  }
+
+  /* ── DECISION LOGIC ── */
+  .decision-strip {
+    background: var(--teal-light);
+    padding: 5rem 0;
+  }
+  .decision-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 3rem;
+  }
+  .decision-grid {
+    display: grid;
+    grid-template-columns: 1fr 60px 1fr;
+    gap: 0;
+    align-items: center;
+    margin-top: 3rem;
+  }
+  .decision-panel {
+    background: var(--white);
+    padding: 2.5rem;
+    border: 1px solid rgba(14,14,13,0.08);
+  }
+  .decision-moment {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 1rem;
+  }
+  .decision-panel h3 {
+    font-family: var(--serif);
+    font-size: 1.35rem;
+    margin-bottom: 1.5rem;
+  }
+  .signal-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+  .signal-list li {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.75rem;
+    font-size: 14px;
+    align-items: start;
+  }
+  .signal-marker {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--teal);
+    padding-top: 0.15rem;
+  }
+  .signal-text { color: #3a3935; line-height: 1.5; }
+  .output-pill {
+    display: inline-flex;
+    gap: 0.5rem;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+  }
+  .pill {
+    padding: 0.3rem 0.8rem;
+    border-radius: 2px;
+    font-size: 11px;
+  }
+  .pill-go { background: #d4ede8; color: var(--teal); }
+  .pill-mod { background: var(--amber-light); color: var(--amber); }
+  .pill-stop { background: #fde8e3; color: var(--red-soft); }
+  .decision-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .arrow-svg { color: var(--warm-gray); }
+
+  /* ── USER RESEARCH ── */
+  .persona-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+  .persona-card {
+    border: 1px solid rgba(14,14,13,0.1);
+    padding: 2rem;
+    position: relative;
+  }
+  .persona-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(14,14,13,0.08);
+  }
+  .persona-name {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+  }
+  .persona-role {
+    font-size: 13px;
+    color: var(--mid-gray);
+    margin-top: 0.2rem;
+  }
+  .persona-badge {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.7rem;
+    background: var(--teal-light);
+    color: var(--teal);
+  }
+  .persona-quote {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--black);
+    margin-bottom: 1.25rem;
+    line-height: 1.6;
+  }
+  .persona-insight {
+    font-size: 13px;
+    color: var(--mid-gray);
+    margin-bottom: 0;
+    line-height: 1.6;
+  }
+  .interview-strip {
+    margin-top: 3rem;
+    border-left: 3px solid var(--teal);
+    padding-left: 2rem;
+  }
+  .interview-item {
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(14,14,13,0.08);
+  }
+  .interview-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .interviewee {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--teal);
+    margin-bottom: 0.5rem;
+  }
+  .interview-quote {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--black);
+    margin-bottom: 0.5rem;
+  }
+  .interview-finding {
+    font-size: 13px;
+    color: var(--mid-gray);
+    margin-bottom: 0;
+  }
+
+  /* ── JOURNEY MAP ── */
+  .journey-section { background: #f2f0ea; }
+  .journey-inner { max-width: 1100px; margin: 0 auto; padding: 6rem 3rem; }
+  .journey-phases {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(14,14,13,0.1);
+    margin-top: 3rem;
+  }
+  .phase {
+    background: #f2f0ea;
+    padding: 2rem;
+  }
+  .phase-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--mid-gray);
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--teal);
+  }
+  .phase-actions {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .phase-actions li {
+    font-size: 13px;
+    color: #3a3935;
+    padding-left: 1rem;
+    position: relative;
+  }
+  .phase-actions li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--warm-gray);
+  }
+  .phase-pain {
+    background: #fde8e3;
+    padding: 0.75rem 1rem;
+    font-size: 12px;
+    color: var(--red-soft);
+    line-height: 1.5;
+  }
+  .phase-soma {
+    background: var(--teal-light);
+    padding: 0.75rem 1rem;
+    font-size: 12px;
+    color: var(--teal);
+    line-height: 1.5;
+    margin-top: 0.5rem;
+  }
+  .phase-soma strong { font-weight: 500; }
+
+  /* ── DESIGN PRINCIPLES ── */
+  .principles-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+  .principle {
+    padding: 2rem;
+    border-top: 2px solid var(--teal);
+  }
+  .principle-number {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--teal);
+    letter-spacing: 0.08em;
+    margin-bottom: 1rem;
+  }
+  .principle h3 {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    margin-bottom: 0.75rem;
+  }
+  .principle p {
+    font-size: 14px;
+    color: var(--mid-gray);
+    margin-bottom: 0;
+  }
+
+  /* ── SCREENS ── */
+  .screens-section { background: var(--black); padding: 6rem 0; }
+  .screens-inner { max-width: 1100px; margin: 0 auto; padding: 0 3rem; }
+  .screens-section h2, .screens-section .section-eyebrow { color: var(--white); }
+  .screens-section .section-eyebrow { color: var(--teal-mid); }
+  .screens-section .section-eyebrow::before { background: var(--teal-mid); }
+  .screens-section p { color: rgba(255,255,255,0.55); }
+
+  .screen-showcase {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+  .screen-item {}
+  .screen-frame {
+    background: #1a1a18;
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 20px;
+    padding: 1.5rem 1rem;
+    margin-bottom: 1.25rem;
+    min-height: 380px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .screen-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--teal-mid);
+    margin-bottom: 0.4rem;
+  }
+  .screen-name {
+    font-size: 15px;
+    color: var(--white);
+    font-weight: 500;
+    margin-bottom: 0.4rem;
+  }
+  .screen-desc {
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 0;
+  }
+
+  /* Mock phone screens */
+  .mock-screen {
+    width: 160px;
+    height: 320px;
+    background: #0e0e0d;
+    border-radius: 24px;
+    border: 1.5px solid rgba(255,255,255,0.12);
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+  .mock-status {
+    height: 28px;
+    background: #0e0e0d;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 14px;
+    flex-shrink: 0;
+  }
+  .mock-status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+  }
+  .mock-time {
+    font-family: var(--mono);
+    font-size: 8px;
+    color: rgba(255,255,255,0.4);
+  }
+  .mock-body {
+    flex: 1;
+    padding: 12px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  /* Dashboard mock */
+  .dash-greeting {
+    font-size: 8px;
+    color: rgba(255,255,255,0.4);
+  }
+  .dash-status {
+    background: #1a2e2a;
+    border-radius: 10px;
+    padding: 10px;
+    border: 1px solid rgba(74,155,135,0.2);
+  }
+  .dash-status-label { font-size: 7px; color: var(--teal-mid); margin-bottom: 4px; }
+  .dash-status-value {
+    font-family: var(--serif);
+    font-size: 18px;
+    color: var(--white);
+  }
+  .dash-status-sub { font-size: 6px; color: rgba(255,255,255,0.35); margin-top: 2px; }
+  .dash-metrics {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+  }
+  .metric-mini {
+    background: rgba(255,255,255,0.04);
+    border-radius: 6px;
+    padding: 6px;
+  }
+  .metric-mini-label { font-size: 6px; color: rgba(255,255,255,0.3); margin-bottom: 2px; }
+  .metric-mini-val { font-size: 11px; color: var(--white); font-weight: 500; }
+  .dash-start-btn {
+    background: var(--teal);
+    border-radius: 8px;
+    padding: 8px;
+    text-align: center;
+    font-size: 8px;
+    color: var(--white);
+    margin-top: auto;
+  }
+
+  /* Live monitor mock */
+  .live-ring-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80px;
+  }
+  .ring-svg { }
+  .live-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3px;
+    margin-top: 4px;
+  }
+  .live-stat {
+    background: rgba(255,255,255,0.04);
+    border-radius: 4px;
+    padding: 5px 3px;
+    text-align: center;
+  }
+  .live-stat-l { font-size: 5px; color: rgba(255,255,255,0.3); }
+  .live-stat-v { font-size: 10px; color: var(--white); font-weight: 500; }
+  .live-bar-section { margin-top: 4px; }
+  .bar-label { font-size: 6px; color: rgba(255,255,255,0.3); margin-bottom: 3px; display: flex; justify-content: space-between; }
+  .bar-track { height: 4px; background: rgba(255,255,255,0.08); border-radius: 2px; }
+  .bar-fill { height: 100%; border-radius: 2px; }
+  .bar-green { background: var(--teal-mid); width: 42%; }
+  .bar-amber { background: var(--amber); width: 68%; }
+
+  /* Alert mock */
+  .alert-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(14,14,13,0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+  }
+  .alert-modal {
+    background: #1c1c1a;
+    border-radius: 14px;
+    border: 1px solid rgba(196,74,46,0.3);
+    padding: 12px;
+    width: 100%;
+  }
+  .alert-icon { font-size: 18px; text-align: center; margin-bottom: 6px; }
+  .alert-title { font-size: 9px; color: #f4896a; text-align: center; font-weight: 500; margin-bottom: 4px; }
+  .alert-body { font-size: 7px; color: rgba(255,255,255,0.5); text-align: center; line-height: 1.4; margin-bottom: 8px; }
+  .alert-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+  .alert-btn { border-radius: 6px; padding: 5px; text-align: center; font-size: 7px; }
+  .alert-primary { background: var(--teal); color: white; }
+  .alert-ghost { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.5); }
+
+  /* Complete mock */
+  .complete-header { text-align: center; margin-bottom: 8px; }
+  .complete-icon { font-size: 20px; margin-bottom: 4px; }
+  .complete-title { font-size: 10px; color: var(--white); font-weight: 500; }
+  .complete-time { font-size: 7px; color: rgba(255,255,255,0.35); }
+  .complete-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3px;
+    margin-bottom: 6px;
+  }
+  .complete-stat {
+    background: rgba(255,255,255,0.04);
+    border-radius: 5px;
+    padding: 6px;
+  }
+  .complete-stat-l { font-size: 6px; color: rgba(255,255,255,0.3); margin-bottom: 2px; }
+  .complete-stat-v { font-size: 11px; color: var(--white); font-weight: 500; }
+  .ai-tip {
+    background: #1a2e2a;
+    border-radius: 6px;
+    padding: 6px 8px;
+    border-left: 2px solid var(--teal-mid);
+  }
+  .ai-tip-label { font-size: 6px; color: var(--teal-mid); margin-bottom: 2px; }
+  .ai-tip-text { font-size: 7px; color: rgba(255,255,255,0.5); line-height: 1.4; }
+
+  /* ── COMPETITIVE ── */
+  .comp-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 3rem;
+    font-size: 14px;
+  }
+  .comp-table th {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--mid-gray);
+    padding: 0.75rem 1.25rem;
+    text-align: left;
+    border-bottom: 1px solid rgba(14,14,13,0.12);
+    font-weight: 400;
+  }
+  .comp-table td {
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid rgba(14,14,13,0.06);
+    color: #3a3935;
+  }
+  .comp-table tr:hover td { background: rgba(14,14,13,0.02); }
+  .comp-table tr.soma-row td { background: var(--teal-light); }
+  .comp-table tr.soma-row td:first-child { font-weight: 500; color: var(--teal); }
+  .check { color: var(--teal); font-size: 14px; }
+  .cross { color: var(--warm-gray); font-size: 14px; }
+  .partial { color: var(--amber); font-size: 14px; }
+
+  /* ── OUTCOMES ── */
+  .outcomes-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(14,14,13,0.1);
+    margin-top: 3rem;
+  }
+  .outcome-card {
+    background: var(--white);
+    padding: 2.5rem 2rem;
+  }
+  .outcome-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--teal);
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+  }
+  .outcome-card h3 {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    margin-bottom: 0.75rem;
+  }
+  .outcome-card p {
+    font-size: 14px;
+    color: var(--mid-gray);
+    margin-bottom: 0;
+  }
+
+  /* ── REFLECTION ── */
+  .reflection-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-top: 3rem;
+  }
+  .reflection-side h3 {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(14,14,13,0.1);
+  }
+  .reflection-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .reflection-list li {
+    font-size: 14px;
+    color: #3a3935;
+    padding-left: 1.25rem;
+    position: relative;
+    line-height: 1.6;
+  }
+  .reflection-list li::before {
+    position: absolute;
+    left: 0;
+    font-size: 12px;
+  }
+  .what-worked li::before { content: '↑'; color: var(--teal); }
+  .what-next li::before { content: '→'; color: var(--amber); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--black);
+    color: rgba(255,255,255,0.35);
+    padding: 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+  }
+  .footer-brand {
+    color: rgba(255,255,255,0.6);
+  }
+  .footer-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+  .footer-links a {
+    color: rgba(255,255,255,0.35);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--teal-mid); }
+
+  /* ── SCROLL ANIMATIONS ── */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { min-height: 50vh; }
+    .problem-grid, .persona-grid, .reflection-grid, .decision-grid { grid-template-columns: 1fr; }
+    .biomarker-grid, .screen-showcase, .principles-grid, .outcomes-grid { grid-template-columns: 1fr; }
+    .journey-phases { grid-template-columns: 1fr; }
+    .decision-arrow { display: none; }
+    section { padding: 4rem 1.5rem; }
+    .comp-table { font-size: 12px; }
+    .comp-table th, .comp-table td { padding: 0.75rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-brand">SOMA — SweatSense</a>
+  <ul class="nav-links">
+    <li><a href="#science">Science</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#design">Design</a></li>
+    <li><a href="#outcome">Outcome</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-left">
+    <div class="project-tag">Portfolio Project · Interaction Design · 2022</div>
+    <h1>SOMA<br><em>SweatSense</em></h1>
+    <p class="hero-subtitle">A wearable + app system that translates sweat biomarkers into plain-language guidance — before, during, and after exercise.</p>
+    <div class="meta-row">
+      <div class="meta-item">
+        <div class="meta-label">Role</div>
+        <div class="meta-value">Individual project</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Type</div>
+        <div class="meta-value">Wearable + Mobile app</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Focus</div>
+        <div class="meta-value">Biosensor UX / Health tech</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <span class="hero-bg-text">S</span>
+    <div class="sweat-ring"></div>
+    <div class="sweat-ring"></div>
+    <div class="sweat-ring"></div>
+    <svg class="hero-device" viewBox="0 0 280 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Band body -->
+      <rect x="60" y="80" width="160" height="240" rx="30" fill="#1a1a18" stroke="#2a2a28" stroke-width="1.5"/>
+      <!-- Screen -->
+      <rect x="75" y="100" width="130" height="200" rx="20" fill="#111210"/>
+      <!-- Sensor dots on back (visible on sides) -->
+      <circle cx="60" cy="180" r="5" fill="#1D9E75" opacity="0.6"/>
+      <circle cx="60" cy="200" r="3" fill="#1D9E75" opacity="0.4"/>
+      <circle cx="220" cy="180" r="5" fill="#1D9E75" opacity="0.6"/>
+      <!-- Screen content -->
+      <!-- Greeting -->
+      <text x="140" y="128" fill="rgba(255,255,255,0.35)" font-size="8" text-anchor="middle" font-family="DM Mono, monospace">09:42 · Ready to train?</text>
+      <!-- Big ring -->
+      <circle cx="140" cy="185" r="45" stroke="rgba(255,255,255,0.06)" stroke-width="8"/>
+      <circle cx="140" cy="185" r="45" stroke="#1D9E75" stroke-width="8" stroke-dasharray="188 283" stroke-linecap="round" transform="rotate(-90 140 185)" opacity="0.9"/>
+      <text x="140" y="181" fill="white" font-size="18" text-anchor="middle" font-family="DM Serif Display, serif" font-weight="400">74</text>
+      <text x="140" y="195" fill="rgba(255,255,255,0.35)" font-size="7" text-anchor="middle" font-family="DM Mono, monospace">Readiness</text>
+      <!-- Bottom stats row -->
+      <rect x="84" y="240" width="36" height="28" rx="5" fill="rgba(255,255,255,0.04)"/>
+      <text x="102" y="251" fill="#4a9b87" font-size="6" text-anchor="middle" font-family="DM Mono, monospace">Na⁺</text>
+      <text x="102" y="263" fill="white" font-size="9" text-anchor="middle" font-family="DM Mono, monospace">OK</text>
+      <rect x="122" y="240" width="36" height="28" rx="5" fill="rgba(255,255,255,0.04)"/>
+      <text x="140" y="251" fill="#4a9b87" font-size="6" text-anchor="middle" font-family="DM Mono, monospace">LAC</text>
+      <text x="140" y="263" fill="white" font-size="9" text-anchor="middle" font-family="DM Mono, monospace">2.1</text>
+      <rect x="160" y="240" width="36" height="28" rx="5" fill="rgba(255,255,255,0.04)"/>
+      <text x="178" y="251" fill="#4a9b87" font-size="6" text-anchor="middle" font-family="DM Mono, monospace">HRV</text>
+      <text x="178" y="263" fill="white" font-size="9" text-anchor="middle" font-family="DM Mono, monospace">58</text>
+      <!-- Start button -->
+      <rect x="90" y="278" width="100" height="14" rx="7" fill="#1D9E75"/>
+      <text x="140" y="288" fill="white" font-size="7" text-anchor="middle" font-family="DM Mono, monospace">Start session →</text>
+      <!-- Band strap top -->
+      <rect x="95" y="40" width="90" height="48" rx="14" fill="#1a1a18" stroke="#2a2a28" stroke-width="1.5"/>
+      <rect x="120" y="52" width="40" height="4" rx="2" fill="rgba(255,255,255,0.08)"/>
+      <rect x="128" y="62" width="24" height="4" rx="2" fill="rgba(255,255,255,0.05)"/>
+      <!-- Band strap bottom -->
+      <rect x="95" y="312" width="90" height="48" rx="14" fill="#1a1a18" stroke="#2a2a28" stroke-width="1.5"/>
+      <circle cx="140" cy="330" r="3" fill="rgba(255,255,255,0.1)"/>
+      <circle cx="132" cy="340" r="2" fill="rgba(255,255,255,0.06)"/>
+      <circle cx="148" cy="340" r="2" fill="rgba(255,255,255,0.06)"/>
+    </svg>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- PROBLEM REFRAME -->
+<section id="problem">
+  <div class="problem-grid">
+    <div class="problem-left fade-up">
+      <div class="section-eyebrow">01 — Problem reframe</div>
+      <h2>The real gap isn't<br>a missing product.<br>It's <em>body blindness.</em></h2>
+      <p>Athletes and casual exercisers alike make every training decision — how hard to push, when to stop, how to recover — based entirely on subjective feeling. There is no real-time data informing these choices.</p>
+      <p>Existing wearables measure <em>physiological</em> signals: heart rate, steps, SpO₂. What they miss is the <em>biochemical</em> layer — what is actually happening inside the body at a metabolic level during exertion.</p>
+      <p>Sweat encodes that layer. The question SOMA asks: can we translate it into guidance a non-expert can act on?</p>
+    </div>
+    <div class="problem-right fade-up">
+      <div class="stat-stack">
+        <div class="stat-card">
+          <div class="stat-number">85%</div>
+          <div class="stat-text">
+            <strong>Self-treat or ignore pain entirely</strong>
+            Questionnaire, n=100. Only 15% see a doctor after sports-related pain or injury.
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">41%</div>
+          <div class="stat-text">
+            <strong>Report injuries from exercise</strong>
+            Most common causes: overloaded intensity, insufficient warm-up, poor body condition awareness.
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">0</div>
+          <div class="stat-text">
+            <strong>Consumer products detect sweat biomarkers in real time</strong>
+            As of 2022, no consumer wearable monitors sweat lactate or electrolytes during exercise.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="insight-callout fade-up">
+    <p>Active but uninformed. The missing link isn't motivation or access to equipment — it's real-time feedback from the body itself.</p>
+    <cite>— Core design problem, synthesised from user research + market analysis</cite>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- SCIENCE ANCHOR -->
+<div class="science-section full-bleed" id="science">
+  <div class="science-inner">
+    <div class="section-eyebrow fade-up">02 — Science anchor</div>
+    <h2 class="fade-up">Why sweat?<br>What the research says.</h2>
+    <p class="fade-up" style="max-width: 600px; color: rgba(255,255,255,0.55);">Sweat is one of the most studied biofluids in wearable sensor research. It is non-invasive, continuously available during exercise, and contains multiple signals that correlate with metabolic state.</p>
+
+    <div class="biomarker-grid">
+      <div class="biomarker-card fade-up">
+        <div class="biomarker-symbol">C₃H₆O₃</div>
+        <div class="biomarker-name">Lactate</div>
+        <div class="biomarker-role">Produced during anaerobic metabolism. Rising sweat lactate signals that muscles are approaching their aerobic threshold — the clearest biochemical indicator of overload during exercise.</div>
+        <span class="biomarker-tag">Fatigue signal</span>
+      </div>
+      <div class="biomarker-card fade-up">
+        <div class="biomarker-symbol">Na⁺ Cl⁻</div>
+        <div class="biomarker-name">Electrolytes</div>
+        <div class="biomarker-role">Sodium and chloride concentration reflects hydration status and thermoregulation. Loss above threshold (&gt;2% body mass) measurably impairs physical and cognitive performance.</div>
+        <span class="biomarker-tag">Hydration risk</span>
+      </div>
+      <div class="biomarker-card fade-up">
+        <div class="biomarker-symbol">C₂₁H₃₀O₅</div>
+        <div class="biomarker-name">Cortisol</div>
+        <div class="biomarker-role">The primary stress hormone. Elevated sweat cortisol correlates with psychological and physiological overreaching. Wearable electrochemical sensors can detect it in real time in sweat.</div>
+        <span class="biomarker-tag">Stress / recovery</span>
+      </div>
+      <div class="biomarker-card fade-up">
+        <div class="biomarker-symbol">HRV</div>
+        <div class="biomarker-name">Heart Rate Variability</div>
+        <div class="biomarker-role">RMSSD, measured at rest in the morning, is validated as a non-invasive proxy for autonomic recovery state. Strong correlation (r=0.84–0.85) with lactate threshold in systematic meta-analyses.</div>
+        <span class="biomarker-tag">Pre-exercise readiness</span>
+      </div>
+    </div>
+
+    <div class="science-caveat fade-up">
+      <div class="caveat-icon">⚠</div>
+      <p class="caveat-text"><strong>Honest design constraint:</strong> Sweat lactate as a proxy for blood lactate remains scientifically debated — correlations vary by sweat rate, body site, and individual. Cortisol detection is promising but consumer validation is limited. SOMA's framing is intentionally careful: it presents signals as <strong>guidance inputs</strong>, not clinical diagnostics. This distinction matters and should be visible in the product's voice.</p>
+    </div>
+  </div>
+</div>
+
+<!-- DECISION LOGIC -->
+<div class="decision-strip full-bleed">
+  <div class="decision-inner">
+    <div class="section-eyebrow fade-up">03 — Product logic</div>
+    <h2 class="fade-up">Two moments of decision.<br>Two different signals.</h2>
+    <p class="fade-up" style="max-width: 580px;">The product logic maps to two distinct physiological questions that athletes face but currently can't answer with data.</p>
+
+    <div class="decision-grid">
+      <div class="decision-panel fade-up">
+        <div class="decision-moment">Before exercise</div>
+        <h3>"Is my body ready to train today?"</h3>
+        <ul class="signal-list">
+          <li>
+            <span class="signal-marker">→</span>
+            <span class="signal-text"><strong>HRV (RMSSD), measured on waking</strong> — reflects autonomic nervous system recovery. Low HRV = incomplete recovery from previous load.</span>
+          </li>
+          <li>
+            <span class="signal-marker">→</span>
+            <span class="signal-text"><strong>Resting skin conductance</strong> — baseline stress proxy before session begins.</span>
+          </li>
+          <li>
+            <span class="signal-marker">→</span>
+            <span class="signal-text"><strong>Prior session data</strong> — lactate and electrolyte loss from last session informs recovery estimate.</span>
+          </li>
+        </ul>
+        <div class="output-pill">
+          <span class="pill pill-go">Go</span>
+          <span class="pill pill-mod">Modify intensity</span>
+          <span class="pill pill-stop">Rest</span>
+        </div>
+      </div>
+
+      <div class="decision-arrow">
+        <svg class="arrow-svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <div class="decision-panel fade-up">
+        <div class="decision-moment">During exercise</div>
+        <h3>"Should I continue, reduce, or stop?"</h3>
+        <ul class="signal-list">
+          <li>
+            <span class="signal-marker">→</span>
+            <span class="signal-text"><strong>Sweat lactate rate-of-change</strong> — rapid rise signals approaching anaerobic threshold, precursor to overload and muscle damage.</span>
+          </li>
+          <li>
+            <span class="signal-marker">→</span>
+            <span class="signal-text"><strong>Na⁺ / Cl⁻ concentration</strong> — electrolyte loss tracking; alert when dehydration risk crosses threshold.</span>
+          </li>
+          <li>
+            <span class="signal-marker">→</span>
+            <span class="signal-text"><strong>Sweat rate + temperature</strong> — context for electrolyte readings; used to calibrate signal accuracy.</span>
+          </li>
+        </ul>
+        <div class="output-pill">
+          <span class="pill pill-go">Continue</span>
+          <span class="pill pill-mod">Reduce intensity</span>
+          <span class="pill pill-stop">Stop + recover</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- USER RESEARCH -->
+<section id="research">
+  <div class="section-eyebrow fade-up">04 — User research</div>
+  <h2 class="fade-up">Quantitative survey + in-depth interviews.</h2>
+  <p class="fade-up" style="max-width: 600px;">n=100 questionnaire to map injury patterns, plus three in-depth interviews across a spectrum of exercise engagement — from sporadic beginner to data-driven enthusiast.</p>
+
+  <div class="persona-grid">
+    <div class="persona-card fade-up">
+      <div class="persona-header">
+        <div>
+          <div class="persona-name">Lisa, 22</div>
+          <div class="persona-role">Student · Yoga & evening jogs · Sporadic</div>
+        </div>
+        <span class="persona-badge">Beginner</span>
+      </div>
+      <p class="persona-quote">"I exercise freely but have no regularity — hard to stay consistent."</p>
+      <p class="persona-insight">Relies entirely on feeling to gauge effort. No awareness of concepts like warm-up or recovery. When pain occurs, default response is to ignore it or stop without understanding why. Needs guidance that doesn't require prior sports knowledge.</p>
+    </div>
+    <div class="persona-card fade-up">
+      <div class="persona-header">
+        <div>
+          <div class="persona-name">Ada, 30</div>
+          <div class="persona-role">Employer · Running & gym · 5× week</div>
+        </div>
+        <span class="persona-badge">Enthusiast</span>
+      </div>
+      <p class="persona-quote">"I need data to tell me what my body actually needs."</p>
+      <p class="persona-insight">Trains consistently and tracks data, but has hit a plateau. Current devices give heart rate and steps — not the metabolic insight she needs to break through. Frustrated by conflicting advice online. Wants expert-level feedback without a sports scientist.</p>
+    </div>
+  </div>
+
+  <div class="interview-strip fade-up">
+    <div class="interview-item">
+      <div class="interviewee">Lily Xiong, 27 — Student · Yoga + runs · ~5×/week</div>
+      <p class="interview-quote">"Pain occurred during yoga — I just ignored it."</p>
+      <p class="interview-finding">Classic body blindness pattern: discomfort without context leads to dismissal. No feedback loop between pain signal and behaviour change.</p>
+    </div>
+    <div class="interview-item">
+      <div class="interviewee">Nancy Yang, 31 — Business Owner · Outdoor sports · Uses sports apps</div>
+      <p class="interview-quote">"Good habits = zero injuries so far."</p>
+      <p class="interview-finding">Structured warm-up and cool-down replaces the need for real-time data. Demonstrates that behaviour, not just technology, drives injury prevention — SOMA's design must reinforce habit formation, not just surface numbers.</p>
+    </div>
+    <div class="interview-item">
+      <div class="interviewee">Steve Qin, 30 — Postdoc · Football · Fri &amp; Sun with teammates</div>
+      <p class="interview-quote">"Recovery took very long — still have sequelae."</p>
+      <p class="interview-finding">Insufficient warm-up led to ankle and knee injuries with lasting effects. Represents the highest-stakes case: overload that wasn't detected until after the injury occurred. Exactly the scenario SOMA's in-session alert is designed to prevent.</p>
+    </div>
+  </div>
+</section>
+
+<!-- JOURNEY MAP -->
+<div class="journey-section full-bleed">
+  <div class="journey-inner">
+    <div class="section-eyebrow fade-up">05 — User journey</div>
+    <h2 class="fade-up">Where SOMA intervenes<br>across the exercise lifecycle.</h2>
+
+    <div class="journey-phases">
+      <div class="phase fade-up">
+        <div class="phase-label">Before exercise</div>
+        <ul class="phase-actions">
+          <li>Search tips and training plans</li>
+          <li>Attempt warm-up routines</li>
+          <li>Assess own readiness by feel</li>
+        </ul>
+        <div class="phase-pain">Pain point: No objective readiness signal. Users proceed regardless of actual recovery state.</div>
+        <div class="phase-soma"><strong>SOMA:</strong> HRV-based readiness score + warm-up intensity recommendation on session start.</div>
+      </div>
+      <div class="phase fade-up">
+        <div class="phase-label">During exercise</div>
+        <ul class="phase-actions">
+          <li>Exercise per memorised instructions</li>
+          <li>Self-monitor fatigue by subjective feel</li>
+          <li>Cool down (frequently skipped)</li>
+        </ul>
+        <div class="phase-pain">Pain point: No real-time overload detection. Users push past safe limits without knowing.</div>
+        <div class="phase-soma"><strong>SOMA:</strong> Live sweat lactate + Na⁺ monitoring. Alert modal when overload threshold is exceeded.</div>
+      </div>
+      <div class="phase fade-up">
+        <div class="phase-label">After exercise</div>
+        <ul class="phase-actions">
+          <li>Log data manually or not at all</li>
+          <li>Self-assess session effectiveness</li>
+          <li>Address pain by ignoring or self-treating</li>
+        </ul>
+        <div class="phase-pain">Pain point: No data-driven recovery guidance. Decisions about next session are uninformed.</div>
+        <div class="phase-soma"><strong>SOMA:</strong> Session summary with sweat data, hydration loss, fatigue index, and AI recovery recommendation.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DESIGN PRINCIPLES -->
+<section>
+  <div class="section-eyebrow fade-up">06 — Design principles</div>
+  <h2 class="fade-up">Three principles that shaped every decision.</h2>
+
+  <div class="principles-grid">
+    <div class="principle fade-up">
+      <div class="principle-number">P.01</div>
+      <h3>Plain language, not raw data</h3>
+      <p>Sweat biomarkers are meaningless to non-experts. Every sensor reading must be translated into an action the user can take. "Your lactate is rising fast" becomes "Reduce your pace."</p>
+    </div>
+    <div class="principle fade-up">
+      <div class="principle-number">P.02</div>
+      <h3>Guidance, not surveillance</h3>
+      <p>The system earns its place by being useful at critical moments, not by collecting data continuously. Alerts should feel like a knowledgeable training partner — not an alarm system.</p>
+    </div>
+    <div class="principle fade-up">
+      <div class="principle-number">P.03</div>
+      <h3>Honest uncertainty</h3>
+      <p>The science of sweat biomarkers is still maturing. SOMA's UI language reflects this — signals are framed as inputs for decision-making, not clinical facts. This trust boundary is a design choice, not a disclaimer.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- SCREENS -->
+<div class="screens-section full-bleed" id="design">
+  <div class="screens-inner">
+    <div class="section-eyebrow fade-up">07 — Key screens</div>
+    <h2 class="fade-up">Six screens across<br>the exercise journey.</h2>
+    <p class="fade-up">Each screen owns a specific moment in the Before / During / After structure. No screen does more than one job.</p>
+
+    <div class="screen-showcase">
+
+      <!-- Dashboard -->
+      <div class="screen-item fade-up">
+        <div class="screen-frame">
+          <div class="mock-screen">
+            <div class="mock-status">
+              <div class="mock-status-dot"></div>
+              <div class="mock-time">09:42</div>
+              <div class="mock-status-dot"></div>
+            </div>
+            <div class="mock-body">
+              <div class="dash-greeting">Good morning</div>
+              <div class="dash-status">
+                <div class="dash-status-label">Body readiness</div>
+                <div class="dash-status-value">Good</div>
+                <div class="dash-status-sub">HRV 58 · Well rested</div>
+              </div>
+              <div class="dash-metrics">
+                <div class="metric-mini">
+                  <div class="metric-mini-label">Na⁺ level</div>
+                  <div class="metric-mini-val" style="color: #4a9b87;">Normal</div>
+                </div>
+                <div class="metric-mini">
+                  <div class="metric-mini-label">Last session</div>
+                  <div class="metric-mini-val">32 min</div>
+                </div>
+                <div class="metric-mini">
+                  <div class="metric-mini-label">Lactate</div>
+                  <div class="metric-mini-val">2.1 mM</div>
+                </div>
+                <div class="metric-mini">
+                  <div class="metric-mini-label">Recovery</div>
+                  <div class="metric-mini-val" style="color: #4a9b87;">Full</div>
+                </div>
+              </div>
+              <div class="dash-start-btn">Start session →</div>
+            </div>
+          </div>
+        </div>
+        <div class="screen-label">Before</div>
+        <div class="screen-name">Dashboard</div>
+        <div class="screen-desc">Pre-session readiness with HRV-based body state summary</div>
+      </div>
+
+      <!-- Live Monitor -->
+      <div class="screen-item fade-up">
+        <div class="screen-frame">
+          <div class="mock-screen">
+            <div class="mock-status">
+              <div class="mock-status-dot" style="background: #1D9E75;"></div>
+              <div class="mock-time">Live</div>
+              <div class="mock-status-dot" style="background: #1D9E75;"></div>
+            </div>
+            <div class="mock-body">
+              <div class="live-ring-container">
+                <svg class="ring-svg" width="80" height="80" viewBox="0 0 80 80">
+                  <circle cx="40" cy="40" r="32" stroke="rgba(255,255,255,0.06)" stroke-width="10" fill="none"/>
+                  <circle cx="40" cy="40" r="32" stroke="#1D9E75" stroke-width="10" fill="none"
+                    stroke-dasharray="134 201" stroke-linecap="round"
+                    transform="rotate(-90 40 40)"/>
+                  <text x="40" y="36" fill="white" font-size="13" text-anchor="middle" font-family="DM Serif Display, serif">42%</text>
+                  <text x="40" y="48" fill="rgba(255,255,255,0.35)" font-size="6" text-anchor="middle" font-family="DM Mono, monospace">sweat index</text>
+                </svg>
+              </div>
+              <div class="live-stats">
+                <div class="live-stat">
+                  <div class="live-stat-l">LAC</div>
+                  <div class="live-stat-v">3.8</div>
+                </div>
+                <div class="live-stat">
+                  <div class="live-stat-l">Na⁺</div>
+                  <div class="live-stat-v" style="color: #4a9b87;">OK</div>
+                </div>
+                <div class="live-stat">
+                  <div class="live-stat-l">HR</div>
+                  <div class="live-stat-v">142</div>
+                </div>
+              </div>
+              <div class="live-bar-section">
+                <div class="bar-label"><span>Fatigue index</span><span style="color: #4a9b87;">Low</span></div>
+                <div class="bar-track"><div class="bar-fill bar-green"></div></div>
+              </div>
+              <div class="live-bar-section">
+                <div class="bar-label"><span>Hydration</span><span style="color: #c8831a;">68%</span></div>
+                <div class="bar-track"><div class="bar-fill bar-amber"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="screen-label">During</div>
+        <div class="screen-name">Live monitor</div>
+        <div class="screen-desc">Real-time sweat ring, fatigue index and electrolyte status</div>
+      </div>
+
+      <!-- Alert -->
+      <div class="screen-item fade-up">
+        <div class="screen-frame">
+          <div class="mock-screen" style="position: relative;">
+            <div class="mock-status">
+              <div class="mock-status-dot" style="background: #1D9E75;"></div>
+              <div class="mock-time">Live</div>
+              <div class="mock-status-dot" style="background: #1D9E75;"></div>
+            </div>
+            <div class="mock-body" style="opacity: 0.2;">
+              <div class="live-ring-container">
+                <svg width="60" height="60" viewBox="0 0 80 80">
+                  <circle cx="40" cy="40" r="32" stroke="rgba(255,255,255,0.06)" stroke-width="10" fill="none"/>
+                  <circle cx="40" cy="40" r="32" stroke="#c44a2e" stroke-width="10" fill="none"
+                    stroke-dasharray="180 201" stroke-linecap="round"
+                    transform="rotate(-90 40 40)"/>
+                </svg>
+              </div>
+            </div>
+            <div class="alert-overlay">
+              <div class="alert-modal">
+                <div class="alert-icon">⚠️</div>
+                <div class="alert-title">Overload detected</div>
+                <div class="alert-body">Lactate rising fast. Your body is approaching its limit. Reduce pace now to prevent injury.</div>
+                <div class="alert-actions">
+                  <div class="alert-btn alert-primary">Reduce pace</div>
+                  <div class="alert-btn alert-ghost">Finish</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="screen-label">During — Alert</div>
+        <div class="screen-name">Overload alert</div>
+        <div class="screen-desc">Modal triggered when lactate threshold is exceeded</div>
+      </div>
+
+      <!-- Complete -->
+      <div class="screen-item fade-up">
+        <div class="screen-frame">
+          <div class="mock-screen">
+            <div class="mock-status">
+              <div class="mock-status-dot"></div>
+              <div class="mock-time">10:18</div>
+              <div class="mock-status-dot"></div>
+            </div>
+            <div class="mock-body">
+              <div class="complete-header">
+                <div class="complete-icon">✓</div>
+                <div class="complete-title">Session complete</div>
+                <div class="complete-time">32 min · Moderate intensity</div>
+              </div>
+              <div class="complete-stats">
+                <div class="complete-stat">
+                  <div class="complete-stat-l">Sweat loss</div>
+                  <div class="complete-stat-v">12 ml</div>
+                </div>
+                <div class="complete-stat">
+                  <div class="complete-stat-l">Peak lactate</div>
+                  <div class="complete-stat-v">5.2 mM</div>
+                </div>
+                <div class="complete-stat">
+                  <div class="complete-stat-l">Na⁺ loss</div>
+                  <div class="complete-stat-v" style="color: #4a9b87;">Low</div>
+                </div>
+                <div class="complete-stat">
+                  <div class="complete-stat-l">Fatigue index</div>
+                  <div class="complete-stat-v">68%</div>
+                </div>
+              </div>
+              <div class="ai-tip">
+                <div class="ai-tip-label">AI recovery tip</div>
+                <div class="ai-tip-text">Drink 400ml water in the next 30 min. Light stretching recommended. Next hard session: 48h rest advised.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="screen-label">After</div>
+        <div class="screen-name">Session complete</div>
+        <div class="screen-desc">Post-session sweat data summary with AI recovery recommendation</div>
+      </div>
+
+      <!-- History -->
+      <div class="screen-item fade-up">
+        <div class="screen-frame">
+          <div class="mock-screen">
+            <div class="mock-status">
+              <div class="mock-status-dot"></div>
+              <div class="mock-time">History</div>
+              <div class="mock-status-dot"></div>
+            </div>
+            <div class="mock-body">
+              <div style="font-size: 8px; color: rgba(255,255,255,0.35); margin-bottom: 6px;">This week</div>
+              <!-- Mini bar chart -->
+              <div style="display: flex; align-items: flex-end; gap: 5px; height: 50px; margin-bottom: 8px;">
+                <div style="width: 18px; background: rgba(74,155,135,0.3); height: 60%; border-radius: 2px 2px 0 0;"></div>
+                <div style="width: 18px; background: rgba(74,155,135,0.3); height: 80%; border-radius: 2px 2px 0 0;"></div>
+                <div style="width: 18px; background: rgba(255,255,255,0.06); height: 10%; border-radius: 2px 2px 0 0;"></div>
+                <div style="width: 18px; background: #1D9E75; height: 100%; border-radius: 2px 2px 0 0;"></div>
+                <div style="width: 18px; background: rgba(74,155,135,0.3); height: 50%; border-radius: 2px 2px 0 0;"></div>
+                <div style="width: 18px; background: rgba(255,255,255,0.06); height: 10%; border-radius: 2px 2px 0 0;"></div>
+                <div style="width: 18px; background: rgba(255,255,255,0.06); height: 10%; border-radius: 2px 2px 0 0;"></div>
+              </div>
+              <div style="display: flex; justify-content: space-between; font-size: 6px; color: rgba(255,255,255,0.2); margin-bottom: 8px;">
+                <span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span>
+              </div>
+              <!-- Session log -->
+              <div style="display: flex; flex-direction: column; gap: 4px;">
+                <div style="background: rgba(255,255,255,0.04); border-radius: 5px; padding: 6px 8px; display: flex; justify-content: space-between; align-items: center;">
+                  <div>
+                    <div style="font-size: 8px; color: white; font-weight: 500;">Thu</div>
+                    <div style="font-size: 6px; color: rgba(255,255,255,0.3);">32 min · 5.2 mM peak</div>
+                  </div>
+                  <div style="font-size: 8px; color: #4a9b87;">Good</div>
+                </div>
+                <div style="background: rgba(255,255,255,0.04); border-radius: 5px; padding: 6px 8px; display: flex; justify-content: space-between; align-items: center;">
+                  <div>
+                    <div style="font-size: 8px; color: white; font-weight: 500;">Tue</div>
+                    <div style="font-size: 6px; color: rgba(255,255,255,0.3);">45 min · 7.1 mM peak</div>
+                  </div>
+                  <div style="font-size: 8px; color: #c8831a;">High</div>
+                </div>
+                <div style="background: rgba(255,255,255,0.04); border-radius: 5px; padding: 6px 8px; display: flex; justify-content: space-between; align-items: center;">
+                  <div>
+                    <div style="font-size: 8px; color: white; font-weight: 500;">Mon</div>
+                    <div style="font-size: 6px; color: rgba(255,255,255,0.3);">28 min · 3.8 mM peak</div>
+                  </div>
+                  <div style="font-size: 8px; color: #4a9b87;">Good</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="screen-label">After</div>
+        <div class="screen-name">History</div>
+        <div class="screen-desc">Weekly trend with session log and peak lactate per session</div>
+      </div>
+
+      <!-- Hardware -->
+      <div class="screen-item fade-up">
+        <div class="screen-frame" style="background: #f2f0ea;">
+          <svg viewBox="0 0 200 300" width="160" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Band -->
+            <rect x="55" y="70" width="90" height="160" rx="20" fill="#1a1a18"/>
+            <rect x="65" y="80" width="70" height="140" rx="14" fill="#111210"/>
+            <!-- Sensor array on bottom -->
+            <circle cx="80" cy="220" r="3" fill="#1D9E75" opacity="0.8"/>
+            <circle cx="100" cy="220" r="3" fill="#1D9E75" opacity="0.8"/>
+            <circle cx="120" cy="220" r="3" fill="#1D9E75" opacity="0.8"/>
+            <rect x="75" y="214" width="50" height="12" rx="4" fill="none" stroke="rgba(74,155,135,0.3)" stroke-width="0.5"/>
+            <!-- Screen on device -->
+            <text x="100" y="115" fill="rgba(255,255,255,0.4)" font-size="6" text-anchor="middle" font-family="DM Mono, monospace">SOMA</text>
+            <circle cx="100" cy="150" r="28" stroke="rgba(255,255,255,0.06)" stroke-width="6" fill="none"/>
+            <circle cx="100" cy="150" r="28" stroke="#1D9E75" stroke-width="6" fill="none"
+              stroke-dasharray="100 176" stroke-linecap="round"
+              transform="rotate(-90 100 150)"/>
+            <text x="100" y="147" fill="white" font-size="10" text-anchor="middle" font-family="DM Serif Display, serif">OK</text>
+            <text x="100" y="160" fill="rgba(255,255,255,0.35)" font-size="5" text-anchor="middle" font-family="DM Mono, monospace">body ready</text>
+            <!-- Strap top -->
+            <rect x="70" y="30" width="60" height="48" rx="10" fill="#1a1a18"/>
+            <!-- Strap bottom -->
+            <rect x="70" y="222" width="60" height="48" rx="10" fill="#1a1a18"/>
+            <!-- Label callouts -->
+            <line x1="55" y1="150" x2="30" y2="130" stroke="rgba(255,255,255,0.15)" stroke-width="0.5"/>
+            <text x="26" y="127" fill="rgba(255,255,255,0.4)" font-size="5" text-anchor="end" font-family="DM Mono, monospace">microfluidic</text>
+            <text x="26" y="133" fill="rgba(255,255,255,0.4)" font-size="5" text-anchor="end" font-family="DM Mono, monospace">sensor patch</text>
+            <line x1="145" y1="220" x2="165" y2="200" stroke="rgba(255,255,255,0.15)" stroke-width="0.5"/>
+            <text x="168" y="197" fill="rgba(74,155,135,0.8)" font-size="5" font-family="DM Mono, monospace">sweat</text>
+            <text x="168" y="203" fill="rgba(74,155,135,0.8)" font-size="5" font-family="DM Mono, monospace">sensor array</text>
+          </svg>
+        </div>
+        <div class="screen-label">Hardware</div>
+        <div class="screen-name">SOMA band</div>
+        <div class="screen-desc">Upper-arm wearable with microfluidic biosensor array and wireless app sync</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- COMPETITIVE POSITIONING -->
+<section id="outcome">
+  <div class="section-eyebrow fade-up">08 — Competitive positioning</div>
+  <h2 class="fade-up">Not a better smartwatch.<br>A different instrument.</h2>
+  <p class="fade-up" style="max-width: 600px;">The key insight from competitive analysis: Apple Watch and fitness trackers measure <em>physiological</em> signals. SOMA measures <em>biochemical</em> ones. These are fundamentally different layers of information — not competing features.</p>
+
+  <table class="comp-table fade-up">
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>HR / HRV</th>
+        <th>Sweat lactate</th>
+        <th>Electrolytes</th>
+        <th>Cortisol</th>
+        <th>Real-time guidance</th>
+        <th>Plain language output</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Apple Watch Ultra</td>
+        <td><span class="check">✓</span></td>
+        <td><span class="cross">—</span></td>
+        <td><span class="cross">—</span></td>
+        <td><span class="cross">—</span></td>
+        <td><span class="partial">Partial</span></td>
+        <td><span class="partial">Partial</span></td>
+      </tr>
+      <tr>
+        <td>Garmin Fenix</td>
+        <td><span class="check">✓</span></td>
+        <td><span class="cross">—</span></td>
+        <td><span class="cross">—</span></td>
+        <td><span class="cross">—</span></td>
+        <td><span class="partial">Partial</span></td>
+        <td><span class="cross">—</span></td>
+      </tr>
+      <tr>
+        <td>Whoop 4.0</td>
+        <td><span class="check">✓</span></td>
+        <td><span class="cross">—</span></td>
+        <td><span class="cross">—</span></td>
+        <td><span class="cross">—</span></td>
+        <td><span class="check">✓</span></td>
+        <td><span class="check">✓</span></td>
+      </tr>
+      <tr>
+        <td>Smart clothing (Hexoskin)</td>
+        <td><span class="check">✓</span></td>
+        <td><span class="cross">—</span></td>
+        <td><span class="cross">—</span></td>
+        <td><span class="cross">—</span></td>
+        <td><span class="cross">—</span></td>
+        <td><span class="cross">—</span></td>
+      </tr>
+      <tr class="soma-row">
+        <td>SOMA SweatSense</td>
+        <td><span class="check">✓</span></td>
+        <td><span class="check">✓</span></td>
+        <td><span class="check">✓</span></td>
+        <td><span class="check">✓</span></td>
+        <td><span class="check">✓</span></td>
+        <td><span class="check">✓</span></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<hr class="divider">
+
+<!-- OUTCOMES -->
+<section>
+  <div class="section-eyebrow fade-up">09 — Project outcomes</div>
+  <h2 class="fade-up">What SOMA delivers.</h2>
+
+  <div class="outcomes-grid">
+    <div class="outcome-card fade-up">
+      <div class="outcome-num">01</div>
+      <h3>Sweat-sensing wearable</h3>
+      <p>Upper-arm band with microfluidic biosensor array detecting sweat lactate, sodium, cortisol, and pH in real time. Designed for wearability during high-intensity exercise.</p>
+    </div>
+    <div class="outcome-card fade-up">
+      <div class="outcome-num">02</div>
+      <h3>Companion app system</h3>
+      <p>Plain-language guidance across Before / During / After — readiness score, live overload alerts, and a data-driven recovery plan. Science translated into decisions a non-expert can make.</p>
+    </div>
+    <div class="outcome-card fade-up">
+      <div class="outcome-num">03</div>
+      <h3>First design of its kind</h3>
+      <p>Addresses sweat biomarker detection and fatigue prevention together in a single consumer product — bridging the gap between sports science research and accessible health technology.</p>
+    </div>
+  </div>
+</section>
+
+<!-- REFLECTION -->
+<section style="background: #f2f0ea; max-width: none; padding: 6rem 0;">
+  <div style="max-width: 1100px; margin: 0 auto; padding: 0 3rem;">
+    <div class="section-eyebrow fade-up">10 — Reflection</div>
+    <h2 class="fade-up">What worked.<br>What I'd do differently.</h2>
+
+    <div class="reflection-grid">
+      <div class="reflection-side fade-up">
+        <h3>What worked</h3>
+        <ul class="reflection-list what-worked">
+          <li>Grounding the product concept in peer-reviewed science gave the design rationale credibility beyond typical student projects.</li>
+          <li>The Before / During / After structure prevented feature creep — each screen has exactly one job.</li>
+          <li>Acknowledging scientific uncertainty in the UI language (signals as guidance, not facts) strengthened rather than weakened trust.</li>
+          <li>User research spanning both beginner and enthusiast profiles revealed a shared blind spot: both personas lack real-time body awareness, just for different reasons.</li>
+        </ul>
+      </div>
+      <div class="reflection-side fade-up">
+        <h3>If I continued this project</h3>
+        <ul class="reflection-list what-next">
+          <li>Validate sweat lactate correlation on a broader population sample — the current science is promising but contested.</li>
+          <li>Prototype the alert UX with real athletes to calibrate false-positive tolerance. Too many alerts = ignored alerts.</li>
+          <li>Design a personalised calibration flow — biomarker baselines vary significantly between individuals, and the app needs to account for this before making reliable recommendations.</li>
+          <li>Explore partnership with sports science institutions for clinical validation, which would be necessary before any health claims could be made in a real product.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-brand">SOMA — SweatSense · Portfolio case study · 2022</span>
+  <ul class="footer-links">
+    <li><a href="#problem">Problem</a></li>
+    <li><a href="#science">Science</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#design">Design</a></li>
+    <li><a href="#outcome">Outcome</a></li>
+  </ul>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, (entry.target.dataset.delay || 0) * 1);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.fade-up').forEach((el, i) => {
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
